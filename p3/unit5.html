@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primary 3 – Unit 5: Together Is Better | Ms. Naglaa Yehia</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --primary: #6d28d9;
+    --secondary: #a855f7;
+    --primary-dark: #4c1d95;
+    --accent: #fbbf24;
+    --success: #16a34a;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --dark: #1e1b4b;
+    --light: #faf5ff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+.arabic-text { font-family: 'Cairo', sans-serif; }
+
+body {
+    background: radial-gradient(circle at top, #f5f3ff, #c4b5fd);
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Header ===== */
+header {
+    background: linear-gradient(135deg, #2e1065, #4c1d95 45%, #6d28d9);
+    color: white;
+    padding: 26px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+    border-bottom: 5px solid var(--accent);
+}
+.header-content { display: flex; align-items: center; gap: 30px; }
+.logo-container {
+    width: 190px; height: 230px; border-radius: 22px; overflow: hidden;
+    background: #2e1065; border: 4px solid var(--accent);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    transition: transform 0.3s ease; flex-shrink: 0;
+}
+.logo-container:hover { transform: scale(1.03) rotate(-2deg); }
+.logo-container img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.brand { display: inline-block;
+    font-family: 'Cairo', sans-serif; font-weight: 900; font-size: 3.2rem; line-height: 1.15;
+    color: var(--accent); text-shadow: 2px 3px 0 rgba(0,0,0,0.35); letter-spacing: 1px;
+}
+.titles h2 { font-size: 1.45rem; font-weight: 600; color: #ede9fe; letter-spacing: 0.5px; }
+.titles h3 {
+    font-size: 1.05rem; font-weight: 400; color: #f5f3ff; margin-top: 10px;
+    background: rgba(0,0,0,0.25); padding: 6px 15px; border-radius: 20px; display: inline-block;
+}
+.header-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.social-links a {
+    color: #25D366; font-size: 2.5rem; text-decoration: none; background: white; border-radius: 50%;
+    width: 65px; height: 65px; display: flex; justify-content: center; align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.social-links a:hover { transform: scale(1.15) translateY(-5px); box-shadow: 0 8px 15px rgba(37,211,102,0.4); }
+.home-link {
+    color: white; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.35);
+    border-radius: 12px; padding: 8px 14px; display: flex; align-items: center; gap: 8px; white-space: nowrap;
+}
+.home-link:hover { background: rgba(255,255,255,0.22); }
+
+/* ===== Layout ===== */
+.container { max-width: 960px; margin: 36px auto; padding: 20px; flex-grow: 1; width: 100%; }
+.screen {
+    display: none; background: white; border-radius: 20px; padding: 40px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1); text-align: center;
+    animation: fadeIn 0.4s ease-out; border: 1px solid #ede9fe;
+}
+.screen.active { display: block; }
+.screen h2 { font-size: 2rem; color: var(--primary); margin-bottom: 10px; }
+.screen p { font-size: 1.1rem; color: #64748b; margin-bottom: 25px; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; margin-top: 25px; }
+.game-card {
+    background: linear-gradient(135deg, #ffffff, #faf5ff);
+    border: 2px solid #ede9fe; border-bottom: 6px solid var(--primary); border-radius: 20px;
+    padding: 28px 20px; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex; flex-direction: column; align-items: center; gap: 15px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+}
+.game-card:hover {
+    transform: translateY(-10px);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-bottom-color: var(--primary-dark); color: white;
+    box-shadow: 0 15px 25px rgba(109,40,217,0.3);
+}
+.game-card h3 { font-size: 1.3rem; font-weight: 600; }
+.game-card i { font-size: 3.5rem; color: var(--primary); transition: color 0.3s; }
+.game-card:hover i { color: white; }
+
+.btn-back {
+    background: var(--danger); color: white; border: none; padding: 12px 25px; border-radius: 12px;
+    cursor: pointer; font-size: 1.1rem; font-weight: 600; box-shadow: 0 4px 0 #b91c1c;
+    transition: all 0.1s; display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-back:active { transform: translateY(4px); box-shadow: 0 0 0 #b91c1c; }
+.btn-section {
+    background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 12px;
+    cursor: pointer; font-size: 1.1rem; font-weight: 600; box-shadow: 0 4px 0 var(--primary-dark);
+    transition: all 0.1s; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px;
+}
+.btn-section:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-dark); }
+
+/* ===== Mode switch ===== */
+.mode-switch { display: inline-flex; flex-wrap: wrap; justify-content: center; background: #e2e8f0; border-radius: 16px; padding: 6px; gap: 6px; margin-bottom: 14px; }
+.mode-btn {
+    border: none; background: transparent; padding: 12px 24px; border-radius: 12px;
+    font-weight: 700; font-size: 1.05rem; cursor: pointer; color: #334155;
+    display: inline-flex; gap: 9px; align-items: center; font-family: inherit; transition: all 0.2s;
+}
+.mode-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(109,40,217,0.35); }
+.screen p.mode-hint { font-size: 0.98rem; color: #475569; margin-bottom: 10px; }
+
+.comp-settings {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px;
+    background: #faf5ff; border: 2px dashed #c4b5fd; border-radius: 16px; padding: 20px;
+    margin: 10px 0 10px; text-align: left;
+}
+.comp-settings label { display: block; font-weight: 600; font-size: 0.95rem; margin-bottom: 6px; color: #334155; }
+.comp-settings input, .comp-settings select {
+    width: 100%; padding: 10px 12px; border: 2px solid #cbd5e1; border-radius: 10px;
+    font-size: 1rem; font-family: inherit; background: white;
+}
+.comp-settings input:focus, .comp-settings select:focus { outline: none; border-color: var(--primary); }
+
+/* ===== Game screen ===== */
+#game-screen.screen { padding: 16px; }
+.comp-topbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.comp-topbar h3 { font-size: 1.15rem; color: #475569; }
+
+.arena { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.arena.solo { grid-template-columns: 1fr; max-width: 880px; margin: 0 auto; }
+
+.team-panel.solo { --team: var(--primary); --team-dark: var(--primary-dark); --team-soft: #faf5ff; }
+.t0 { --team: #2563eb; --team-dark: #1e3a8a; --team-soft: #eff6ff; }
+.t1 { --team: #ea580c; --team-dark: #9a3412; --team-soft: #fff7ed; }
+
+.team-panel {
+    border: 4px solid var(--team); border-radius: 18px; padding: 14px; background: var(--team-soft);
+    display: flex; flex-direction: column; position: relative; overflow: hidden; min-height: 520px;
+}
+.team-panel.solo { min-height: 0; padding: 20px; }
+.team-head {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--team); color: white; border-radius: 12px; padding: 10px 14px; margin-bottom: 10px;
+}
+.team-name { font-size: 1.3rem; font-weight: 800; }
+.team-score { font-size: 1.5rem; font-weight: 800; background: rgba(255,255,255,0.22); padding: 2px 14px; border-radius: 10px; }
+.team-meta { display: flex; justify-content: space-between; align-items: center; font-weight: 700; color: var(--team-dark); margin-bottom: 6px; }
+.timer-num { font-size: 1.4rem; min-width: 48px; text-align: right; }
+.timer-bar { height: 12px; background: #e2e8f0; border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
+.timer-fill { height: 100%; width: 100%; background: var(--success); transition: width 0.1s linear, background 0.3s; }
+.timer-fill.warn { background: var(--warning); }
+.timer-fill.danger { background: var(--danger); }
+.team-panel.solo .timer-num, .team-panel.solo .timer-bar { display: none; }
+.team-panel.solo .team-meta { margin-bottom: 14px; }
+
+.question-text { font-size: 1.8rem; margin-bottom: 30px; font-weight: 800; color: var(--dark); line-height: 1.4; }
+.team-panel .question-text { font-size: 1.35rem; margin-bottom: 16px; min-height: 3.8em; display: flex; align-items: center; justify-content: center; }
+.team-panel.solo .question-text { font-size: 1.75rem; margin-bottom: 26px; }
+
+.options-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+.team-panel .options-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+.team-panel.solo .options-grid { grid-template-columns: 1fr; gap: 14px; }
+
+.option-btn {
+    background: white; border: 2px solid #e2e8f0; color: var(--dark); padding: 18px; border-radius: 15px;
+    font-size: 1.3rem; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 5px 0 #cbd5e1; position: relative;
+}
+.team-panel .option-btn { font-size: 1.15rem; padding: 14px 10px; }
+.team-panel.solo .option-btn { font-size: 1.3rem; padding: 18px; }
+.option-btn:active { transform: translateY(5px); box-shadow: 0 0 0 #cbd5e1; }
+.option-btn:hover { border-color: var(--team, var(--primary)); background: #f8fafc; }
+.option-btn.correct { background: var(--success); border-color: var(--success); color: white; box-shadow: 0 5px 0 #15803d; }
+.option-btn.wrong { background: var(--danger); border-color: var(--danger); color: white; box-shadow: 0 5px 0 #b91c1c; }
+.option-btn, .bubble, .target { touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+
+.bubbles-container {
+    position: relative; height: 340px; background: linear-gradient(to bottom, #ddd6fe, #faf5ff);
+    border-radius: 20px; overflow: hidden; border: 4px solid var(--team, var(--primary));
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+}
+.team-panel.solo .bubbles-container { height: 450px; }
+.bubble {
+    position: absolute;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(237,233,254,0.95));
+    border: 2px solid rgba(255,255,255,0.6); border-radius: 50%;
+    display: flex; justify-content: center; align-items: center; font-weight: 800; color: var(--primary-dark);
+    cursor: pointer; box-shadow: 0 8px 15px rgba(0,0,0,0.1), inset -5px -5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.1s; text-align: center; padding: 4px; font-size: 0.85rem; line-height: 1.1;
+    overflow: hidden; word-break: break-word; z-index: 2;
+}
+.bubble:active { transform: scale(0.9); }
+
+.targets-container {
+    position: relative; height: 320px; background: linear-gradient(135deg, #2e1065, #5b21b6);
+    border-radius: 20px; overflow: hidden; border: 4px solid var(--accent); box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+}
+.team-panel.solo .targets-container { height: 400px; }
+.target {
+    position: absolute; background: radial-gradient(circle, #fff, #fcd34d, #f59e0b);
+    border: 4px solid white; padding: 15px 25px; border-radius: 30px; font-weight: 800; color: white;
+    text-shadow: 1px 1px 2px black; cursor: crosshair; display: flex; justify-content: center; align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4); white-space: nowrap; text-align: center; z-index: 2;
+}
+
+.team-flash {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 7rem; pointer-events: none; opacity: 0; transition: opacity 0.2s; z-index: 5;
+}
+.team-flash.show { opacity: 1; }
+.team-flash.correct { color: var(--success); background: rgba(22,163,74,0.12); }
+.team-flash.wrong { color: var(--danger); background: rgba(239,68,68,0.12); }
+
+.team-done {
+    position: absolute; inset: 0; background: rgba(255,255,255,0.93);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 6; text-align: center; gap: 10px; padding: 20px;
+}
+.team-panel.finished .team-done { display: flex; }
+
+.countdown-overlay {
+    position: fixed; inset: 0; background: rgba(46,16,101,0.82); display: none; align-items: center; justify-content: center;
+    z-index: 2000; color: var(--accent); font-size: 10rem; font-weight: 900; font-family: 'Poppins', sans-serif;
+}
+.countdown-overlay.show { display: flex; }
+
+/* ===== Results ===== */
+.results-list {
+    text-align: left; margin-top: 20px; max-height: 400px; overflow-y: auto;
+    border: 2px solid #e2e8f0; padding: 18px; border-radius: 15px; background: #f8fafc;
+}
+.mistake-item { background: white; padding: 14px; border-left: 5px solid var(--danger); margin-bottom: 12px; border-radius: 10px; box-shadow: 0 3px 6px rgba(0,0,0,0.05); }
+.mistake-q { font-weight: 600; margin-bottom: 8px; font-size: 1.05rem; color: var(--dark); }
+.mistake-a { color: var(--success); font-weight: 800; }
+
+.final-score { margin: 18px 0; font-size: 1.9rem; color: var(--primary); }
+.winner-banner { font-size: 2.2rem; font-weight: 900; margin: 10px 0 20px; color: #b45309; }
+.score-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center; }
+.score-card { border: 4px solid var(--team); background: var(--team-soft); border-radius: 18px; padding: 18px; }
+.score-card.win { box-shadow: 0 0 0 6px var(--accent), 0 10px 25px rgba(0,0,0,0.15); }
+.score-card h4 { font-size: 1.4rem; color: var(--team-dark); }
+.score-card .big { font-size: 3rem; font-weight: 900; color: var(--team-dark); line-height: 1.2; }
+.score-card .meta { color: #475569; font-weight: 600; }
+.score-card .results-list { max-height: 260px; margin-top: 12px; padding: 12px; }
+.results-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 25px; }
+.results-actions button { margin: 0; padding: 15px 30px; font-size: 1.15rem; }
+
+.whatsapp-share { margin-top: 28px; padding: 25px; background: #faf5ff; border: 2px dashed #25D366; border-radius: 18px; }
+.screen .whatsapp-share p { margin-bottom: 15px; color: var(--dark); font-weight: 700; font-size: 1.1rem; }
+.name-input {
+    width: 100%; max-width: 340px; padding: 14px 18px; border: 2px solid #cbd5e1; border-radius: 12px;
+    font-size: 1.1rem; font-family: 'Poppins', sans-serif; margin-bottom: 15px; text-align: center;
+}
+.name-input:focus { outline: none; border-color: #25D366; }
+.name-input.input-error { border-color: var(--danger); animation: shakeInput 0.4s; }
+@keyframes shakeInput { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.btn-whatsapp {
+    background: #25D366; color: white; border: none; padding: 14px 28px; border-radius: 12px; cursor: pointer;
+    font-size: 1.1rem; font-weight: 700; box-shadow: 0 4px 0 #128C3E; transition: all 0.1s;
+    display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-whatsapp:active { transform: translateY(4px); box-shadow: 0 0 0 #128C3E; }
+
+.main-footer {
+    background: #2e1065; color: white; text-align: center; padding: 20px; font-size: 1.15rem;
+    font-weight: 600; letter-spacing: 1px; margin-top: auto; border-top: 4px solid var(--accent);
+}
+.main-footer .brand-mini { font-family: 'Cairo', sans-serif; color: var(--accent); font-weight: 900; }
+
+@media (max-width: 900px) {
+    .arena, .score-cards { grid-template-columns: 1fr; }
+    .team-panel { min-height: auto; }
+}
+@media (max-width: 768px) {
+    header { padding: 22px 18px; flex-direction: column; text-align: center; }
+    .header-content { flex-direction: column; gap: 14px; }
+    .logo-container { width: 140px; height: 170px; }
+    .brand { font-size: 2.4rem; }
+    .titles h2 { font-size: 1.1rem; }
+    .header-actions { flex-direction: row; }
+    .screen { padding: 24px 16px; }
+    .question-text, .team-panel.solo .question-text { font-size: 1.35rem; }
+    .option-btn, .team-panel.solo .option-btn { font-size: 1.1rem; }
+    .social-links a { width: 55px; height: 55px; font-size: 2.2rem; }
+    .team-panel.solo .bubbles-container { height: 380px; }
+    .bubble { font-size: 0.68rem; padding: 2px; }
+    .team-panel.solo .targets-container { height: 320px; }
+    .target { padding: 8px 12px; font-size: 0.72rem; white-space: normal; max-width: 42%; line-height: 1.15; }
+}
+@media (max-width: 480px) {
+    .team-panel.solo .bubbles-container { height: 320px; }
+    .bubble { font-size: 0.6rem; }
+    .team-panel.solo .targets-container { height: 280px; }
+    .target { font-size: 0.65rem; padding: 6px 10px; max-width: 46%; }
+}
+
+/* compact header while a competition is running */
+body.compact header { padding: 10px 20px; flex-direction: row; text-align: left; }
+body.compact .header-content { flex-direction: row; gap: 14px; }
+body.compact .logo-container { width: 54px; height: 66px; border-radius: 10px; border-width: 2px; }
+body.compact .brand { font-size: 1.5rem; }
+body.compact .titles h2 { font-size: 0.9rem; }
+body.compact .titles h3 { display: none; }
+body.compact .header-actions { flex-direction: row; }
+body.compact .home-link { display: none; }
+body.compact .social-links a { width: 44px; height: 44px; font-size: 1.6rem; }
+body.compact .main-footer { display: none; }
+body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
+
+
+/* ===== Naglaa Yehia branding & extra game parts ===== */
+.logo-container {
+    width: 150px; height: 150px; border-radius: 50%;
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 3.4rem; letter-spacing: 2px;
+    text-shadow: 2px 3px 0 rgba(0,0,0,0.25);
+}
+.brand { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 2.8rem; letter-spacing: 0.5px; }
+.brand .ms { color: #fde68a; font-weight: 600; font-size: 0.6em; display: block; letter-spacing: 3px; }
+.game-card .sub { font-size: 0.85rem; font-weight: 400; display: block; margin-top: 4px; }
+.game-card .count {
+    font-size: 0.8rem; font-weight: 700; background: #ede9fe; color: #4c1d95;
+    padding: 3px 12px; border-radius: 20px;
+}
+.game-card:hover .count { background: rgba(255,255,255,0.25); color: #fff; }
+
+.q-extra { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 14px; }
+.q-extra:empty { display: none; }
+.q-img {
+    max-width: 100%; max-height: 230px; border-radius: 16px; border: 4px solid var(--primary);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15); object-fit: contain; background: #fff;
+}
+.team-panel:not(.solo) .q-img { max-height: 170px; }
+.q-passage {
+    text-align: left; background: #fffbeb; border: 2px solid #fcd34d; border-left: 6px solid #f59e0b;
+    border-radius: 14px; padding: 14px 16px; font-size: 1.05rem; line-height: 1.6; color: #1e1b4b;
+    max-height: 230px; overflow-y: auto; width: 100%;
+}
+.q-passage b { color: #b45309; display: block; margin-bottom: 4px; font-size: 0.9rem; }
+.q-box { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 10px 12px; border: 2px dashed var(--secondary); border-radius: 14px; background: #faf5ff; }
+.q-box span { background: var(--primary); color: #fff; font-weight: 700; padding: 5px 12px; border-radius: 10px; font-size: 1rem; }
+
+.options-grid.two { grid-template-columns: 1fr 1fr !important; }
+.options-grid.two .option-btn { font-size: 1.35rem; padding: 22px 10px; }
+
+.build-wrap { display: flex; flex-direction: column; gap: 14px; }
+.build-line {
+    min-height: 70px; border: 3px dashed var(--secondary); border-radius: 16px; background: #faf5ff;
+    display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; align-items: center; justify-content: center;
+}
+.build-line.ok { border-style: solid; border-color: var(--success); background: #dcfce7; }
+.build-line.bad { border-style: solid; border-color: var(--danger); background: #fee2e2; }
+.build-pool { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; min-height: 54px; }
+.tile {
+    background: white; border: 2px solid #c4b5fd; color: var(--dark); padding: 10px 16px; border-radius: 12px;
+    font-size: 1.2rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 0 #c4b5fd; font-family: inherit;
+    touch-action: manipulation; user-select: none; -webkit-user-select: none;
+}
+.build-line .tile { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 0 var(--primary-dark); }
+.build-answer { font-weight: 800; color: var(--success); font-size: 1.15rem; min-height: 1.4em; }
+.build-hint { color: #64748b; font-size: 0.95rem; }
+
+@media (max-width: 768px) {
+    .logo-container { width: 110px; height: 110px; font-size: 2.5rem; }
+    .brand { font-size: 2rem; }
+    .q-img { max-height: 190px; }
+    .q-passage { white-space: pre-line; font-size: 0.98rem; max-height: 200px; }
+    .tile { font-size: 1.05rem; padding: 9px 12px; }
+    .options-grid.two .option-btn { font-size: 1.1rem; padding: 18px 6px; }
+}
+body.compact .logo-container { width: 54px; height: 54px; font-size: 1.2rem; border-width: 2px; }
+body.compact .brand { font-size: 1.3rem; }
+body.compact .brand .ms { display: inline; font-size: 0.7em; letter-spacing: 1px; margin-right: 6px; }
+
+.lesson-card .pg { font-size: 0.8rem; font-weight: 700; background: #ede9fe; color: #4c1d95; padding: 3px 12px; border-radius: 20px; }
+.game-card:hover .pg { background: rgba(255,255,255,0.25); color: #fff; }
+.lesson-num { font-size: 2.2rem; font-weight: 900; color: var(--primary); line-height: 1; }
+.game-card:hover .lesson-num { color: #fff; }
+.sec-list { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; text-align: left; }
+.sec-item { display: flex; align-items: center; gap: 12px; background: #faf5ff; border: 2px solid #ede9fe; border-left: 6px solid var(--primary); border-radius: 14px; padding: 12px 14px; cursor: pointer; }
+.sec-item:hover { background: #ede9fe; }
+.sec-item .k { font-size: 0.8rem; font-weight: 800; color: #fff; background: var(--primary); padding: 3px 10px; border-radius: 10px; white-space: nowrap; }
+.sec-item .k.hp { background: #db2777; } .sec-item .k.wu { background: #f59e0b; }
+.sec-item .i { flex: 1; font-weight: 600; color: #1e1b4b; font-size: 0.98rem; }
+.sec-item .n { font-size: 0.8rem; color: #64748b; white-space: nowrap; }
+.play-all { width: 100%; justify-content: center; margin-top: 6px; }
+.sec-head { text-align: left; margin-bottom: 12px; }
+.sec-head .k { display: inline-block; font-size: 0.8rem; font-weight: 800; color: #fff; background: var(--primary); padding: 3px 10px; border-radius: 10px; margin-bottom: 6px; }
+.sec-head .k.hp { background: #db2777; } .sec-head .k.wu { background: #f59e0b; }
+.sec-head .ins { font-weight: 800; color: #1e1b4b; font-size: 1.05rem; text-decoration: underline; text-decoration-color: #c4b5fd; text-underline-offset: 4px; }
+.sec-head .sub { font-weight: 800; color: #b45309; margin-top: 6px; font-size: 1rem; }
+.q-passage .blank { display: inline-block; min-width: 70px; border-bottom: 2px dotted #94a3b8; font-weight: 800; color: #64748b; text-align: center; padding: 0 4px; }
+.q-passage .blank.cur { background: #fde68a; color: #92400e; border: 2px solid #f59e0b; border-radius: 8px; }
+.q-passage .blank.ok { color: #15803d; border-bottom-color: #15803d; }
+.q-passage .blank.bad { color: #b91c1c; border-bottom-color: #b91c1c; }
+.q-box span.used { background: #cbd5e1; color: #64748b; text-decoration: line-through; }
+.option-btn .lbl { color: var(--primary); font-weight: 800; margin-right: 6px; }
+.option-btn.correct .lbl, .option-btn.wrong .lbl { color: #fff; }
+.option-btn:disabled.used { opacity: 0.45; text-decoration: line-through; }
+.typed-wrap { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.typed-input { width: 100%; max-width: 420px; padding: 14px 16px; border: 3px solid #c4b5fd; border-radius: 14px; font-size: 1.3rem; text-align: center; font-family: 'Poppins', sans-serif; }
+.typed-input:focus { outline: none; border-color: var(--primary); }
+.typed-input.ok { border-color: var(--success); background: #dcfce7; }
+.typed-input.bad { border-color: var(--danger); background: #fee2e2; }
+.ans-note { font-weight: 800; color: var(--success); font-size: 1.1rem; min-height: 1.3em; margin-top: 10px; }
+.model-box { display: none; background: #ecfdf5; border: 2px solid #86efac; border-radius: 14px; padding: 14px; text-align: left; line-height: 1.6; color: #14532d; font-weight: 600; }
+.model-box.show { display: block; }
+.write-wrap { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.write-tag { font-size: 0.9rem; color: #64748b; }
+.write-area { width: 100%; min-height: 90px; padding: 12px; border: 2px dashed #c4b5fd; border-radius: 14px; font-size: 1.05rem; font-family: 'Poppins', sans-serif; }
+.question-text.small { font-size: 1.3rem !important; }
+
+@media (max-width: 768px) {
+  .sec-head .ins { font-size: 0.98rem; }
+  .question-text.small { font-size: 1.15rem !important; }
+  .typed-input { font-size: 1.15rem; }
+}
+
+.option-btn.selected { border-color: var(--primary) !important; background: #ede9fe !important; box-shadow: 0 5px 0 var(--primary) !important; }
+.check-row { display: flex; gap: 12px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+.btn-check, .btn-next { border: none; border-radius: 14px; padding: 14px 34px; font-size: 1.2rem; font-weight: 800; cursor: pointer; font-family: inherit; color: #fff; touch-action: manipulation; }
+.btn-check { background: var(--primary); box-shadow: 0 5px 0 var(--primary-dark); }
+.btn-check:disabled { background: #cbd5e1; box-shadow: 0 5px 0 #94a3b8; cursor: not-allowed; }
+.btn-next { background: #16a34a; box-shadow: 0 5px 0 #15803d; }
+.why-note { display: none; margin-top: 14px; text-align: left; border-radius: 14px; padding: 12px 16px; font-size: 1.05rem; line-height: 1.55; border: 2px dashed; }
+.why-note.show { display: block; }
+.why-note.ok { background: #f0fdf4; border-color: #22c55e; color: #14532d; }
+.why-note.bad { background: #fff7ed; border-color: #f97316; color: #7c2d12; }
+.why-note .hd { font-weight: 800; display: block; margin-bottom: 4px; font-size: 1.1rem; }
+.why-note .ex { display: block; }
+.why-note .ex::before { content: "📝 Note: "; font-weight: 800; }
+.say-btn { border: none; background: #fbbf24; color: #1e1b4b; font-weight: 800; border-radius: 50px; padding: 10px 22px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 0 #b45309; font-family: inherit; }
+.q-img.wide { max-height: 260px; }
+.option-btn img { max-height: 70px; display: block; margin: 0 auto 4px; }
+@media (max-width: 768px) { .why-note { font-size: 0.98rem; } .btn-check, .btn-next { padding: 12px 26px; font-size: 1.1rem; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo-container">NY</div>
+            <div class="titles">
+                <div class="brand"><span class="ms">MS.</span>Naglaa Yehia</div>
+                <h2>English Language — Primary 3</h2>
+                <h3>Unit 5: Together Is Better | Performance Tasks and Assessments</h3>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="social-links">
+                <a href="https://wa.me/201288712799" target="_blank" title="Contact via WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div id="main-menu" class="screen active">
+            <h2>Unit 5: Together Is Better</h2>
+            <p>Choose a lesson — the questions are exactly as in your book.</p>
+
+            <div class="mode-switch">
+                <button class="mode-btn active" id="mode-solo" onclick="setMode('solo')"><i class="fas fa-user"></i> Play Now</button>
+                <button class="mode-btn" id="mode-comp" onclick="setMode('comp')"><i class="fas fa-users"></i> Team Competition</button>
+            </div>
+            <p class="mode-hint" id="mode-hint"></p>
+
+            <div class="comp-settings" id="comp-settings" style="display:none">
+                <div>
+                    <label><i class="fas fa-users" style="color:#2563eb"></i> Team 1 name</label>
+                    <input type="text" id="team1-name" value="Team A" maxlength="20">
+                </div>
+                <div>
+                    <label><i class="fas fa-users" style="color:#ea580c"></i> Team 2 name</label>
+                    <input type="text" id="team2-name" value="Team B" maxlength="20">
+                </div>
+                <div>
+                    <label><i class="fas fa-stopwatch"></i> Time per question</label>
+                    <select id="q-time">
+                        <option value="20">20 seconds</option>
+                        <option value="30" selected>30 seconds</option>
+                        <option value="45">45 seconds</option>
+                        <option value="60">60 seconds</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="menu-grid" id="lessons-grid"></div>
+        </div>
+
+        <div id="lesson-screen" class="screen">
+            <button class="btn-section" onclick="switchScreen('main-menu')"><i class="fas fa-arrow-left"></i> Lessons</button>
+            <h2 id="lesson-title"></h2>
+            <p id="lesson-desc"></p>
+            <button class="btn-section play-all" onclick="startPlay(currentLessonId, null)"><i class="fas fa-play"></i> Play the whole lesson</button>
+            <div class="sec-list" id="sec-list"></div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div class="comp-topbar">
+                <button class="btn-back" id="btn-stop" onclick="returnToLesson()"><i class="fas fa-arrow-left"></i> Back</button>
+                <h3 id="comp-title"></h3>
+                <h3 id="comp-time-wrap"><i class="fas fa-stopwatch"></i> <span id="comp-time-label">30</span>s / question</h3>
+            </div>
+            <div class="arena" id="arena"></div>
+        </div>
+
+        <div id="solo-results" class="screen">
+            <h2>Well done!</h2>
+            <h3 class="final-score">Final Score: <span id="final-score"></span> / <span id="final-total"></span></h3>
+            <div id="mistakes-container" class="results-list"></div>
+
+            <div class="whatsapp-share">
+                <p>📩 Send your result to Ms. Naglaa Yehia</p>
+                <input type="text" id="student-name-input" class="name-input" placeholder="Type your name here">
+                <br>
+                <button class="btn-whatsapp" onclick="sendSoloResult()"><i class="fab fa-whatsapp"></i> Send Result via WhatsApp</button>
+            </div>
+
+            <div class="results-actions">
+                <button class="btn-section" onclick="startPlay(currentLessonId, currentSecIdx)"><i class="fas fa-redo"></i> Play Again</button>
+                <button class="btn-back" style="background: var(--dark); box-shadow: 0 5px 0 #000;" onclick="returnToLesson()"><i class="fas fa-list"></i> Lesson Menu</button>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen">
+            <h2>Competition Over!</h2>
+            <div class="winner-banner" id="winner-banner"></div>
+            <div class="score-cards" id="score-cards"></div>
+
+            <div class="whatsapp-share">
+                <p>📩 Send the competition result to Ms. Naglaa Yehia</p>
+                <input type="text" id="class-name-input" class="name-input" placeholder="Class name (optional)">
+                <br>
+                <button class="btn-whatsapp" onclick="sendCompResult()"><i class="fab fa-whatsapp"></i> Send Result via WhatsApp</button>
+            </div>
+
+            <div class="results-actions">
+                <button class="btn-section" onclick="startPlay(currentLessonId, currentSecIdx)"><i class="fas fa-redo"></i> Rematch</button>
+                <button class="btn-back" style="background: var(--dark); box-shadow: 0 5px 0 #000;" onclick="returnToLesson()"><i class="fas fa-list"></i> Lesson Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <span class="brand-mini">Ms. Naglaa Yehia</span> — English Language ✨ 01288712799
+    </footer>
+
+    <div class="countdown-overlay" id="countdown"></div>
+
+    <script>
+
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+        try { audioCtx = new AudioContext(); } catch (e) {}
+
+        function tone(type, f1, f2, dur, delay) {
+            const t0 = audioCtx.currentTime + (delay || 0);
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.type = type;
+            osc.frequency.setValueAtTime(f1, t0);
+            osc.frequency.exponentialRampToValueAtTime(f2, t0 + dur);
+            gain.gain.setValueAtTime(0.1, t0);
+            gain.gain.exponentialRampToValueAtTime(0.01, t0 + dur);
+            osc.start(t0);
+            osc.stop(t0 + dur);
+        }
+
+        function playSound(type) {
+            if (!audioCtx) return;
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                if (type === 'correct') tone('sine', 400, 800, 0.15);
+                else if (type === 'wrong') tone('sawtooth', 300, 100, 0.3);
+                else if (type === 'tick') tone('sine', 600, 600, 0.12);
+                else if (type === 'go') tone('square', 700, 1000, 0.3);
+                else if (type === 'win') [523, 659, 784, 1047].forEach((f, i) => tone('triangle', f, f, 0.25, i * 0.15));
+            } catch (e) {}
+        }
+
+                const GRADE_LABEL = "Primary 3";
+        const UNIT_NAME = "Unit 5: Together Is Better";
+        const TEACHER_PHONE = '201288712799';
+
+        const LESSONS = [{"title": "Lesson 1", "name": "Teamwork & Chores", "page": 43, "sections": [{"kind": "Classroom performance", "instr": "Activity 1 Unscramble and write:", "items": [{"t": "mcq", "q": "1. d-i-y-t up the d-e-b", "opts": ["share", "care", "win", "tidy up the bed"], "ans": "tidy up the bed", "why": "The boy is making his bed → tidy up the bed.", "img": "img/u5_tidy.jpg"}, {"t": "mcq", "q": "2. a-r-e-c", "opts": ["win", "care", "tidy up the bed", "donate"], "ans": "care", "why": "The letters “a-r-e-c” make the word “care”.", "img": "img/u5_care.jpg"}, {"t": "mcq", "q": "3. a-r-h-s-e", "opts": ["win", "care", "donate", "share"], "ans": "share", "why": "The letters “a-r-h-s-e” make the word “share”.", "img": "img/u5_share.jpg"}]}, {"kind": "Classroom performance", "instr": "Activity 2 Reorder the following words to make sentences:", "items": [{"t": "build", "tiles": ["donates", "Omar", "clothes"], "ans": "Omar donates clothes", "end": ".", "why": "Omar + donates + clothes."}, {"t": "build", "tiles": ["wins", "Omar", "match", "football", "the"], "ans": "Omar wins the football match", "end": ".", "why": "Omar + wins + the football match."}, {"t": "build", "tiles": ["sister", "with", "food", "shares", "Sara", "her"], "ans": "Sara shares food with her sister", "end": ".", "why": "Sara + shares + food + with her sister."}]}, {"kind": "Home performance", "instr": "Homework: Complete the text from the words in the box (together - home - chores - tidy)", "items": [{"t": "blank", "n": 1, "accept": ["chores"], "why": "Jobs at home = chores."}, {"t": "blank", "n": 2, "accept": ["tidy"], "why": "tidy up the room."}, {"t": "blank", "n": 3, "accept": ["together"], "why": "They work together."}], "box": ["together", "home", "chores", "tidy"], "passage": "Mona and Karim are at home. Their mother asks them to do some {1} . First, they {2} up the living room. Then, they clean the table and the floor. Mona and Karim work {3} and share the chores. They are happy to help."}], "id": 1}, {"title": "Lesson 2", "name": "Teamwork at School", "page": 44, "sections": [{"kind": "Classroom performance", "instr": "Activity 1 Reorder the following words to make correct sentences:", "items": [{"t": "build", "tiles": ["finds", "Youssef", "a", "idea", "good"], "ans": "Youssef finds a good idea", "end": ".", "why": "Youssef + finds + a good idea."}, {"t": "build", "tiles": ["work", "They", "a", "team", "as"], "ans": "They work as a team", "end": ".", "why": "They + work + as a team."}, {"t": "build", "tiles": ["their", "plan", "They", "project"], "ans": "They plan their project", "end": ".", "why": "They + plan + their project."}]}, {"kind": "Classroom performance", "instr": "Activity 2 Find and write the odd word out:", "items": [{"t": "mcq", "q": "1- gum - good - giraffe", "opts": ["gum", "good", "giraffe"], "ans": "giraffe", "why": "gum and good have a hard /g/; giraffe has a soft g (/dʒ/)."}, {"t": "mcq", "q": "2- gum - green - dog", "opts": ["gum", "green", "dog"], "ans": "dog", "why": "gum and green start with g; in dog the g is at the end."}, {"t": "mcq", "q": "3- big - dog - page", "opts": ["big", "dog", "page"], "ans": "page", "why": "big and dog end with a hard /g/; page has a soft g (/dʒ/)."}]}, {"kind": "Home performance", "instr": "Homework: Complete the text from the words in the box (good job - ideas - project - helped)", "items": [{"t": "blank", "n": 1, "accept": ["project"], "why": "They had a project at school."}, {"t": "blank", "n": 2, "accept": ["ideas"], "why": "share ideas."}, {"t": "blank", "n": 3, "accept": ["helped"], "why": "He helped her."}, {"t": "blank", "n": 4, "accept": ["good job"], "why": "The teacher said “Good job!”"}], "box": ["good job", "ideas", "project", "helped"], "passage": "Salma and Youssef had a {1} at school. At first, they couldn't agree on what to do. Then, they started to share {2} . Salma wrote, and Youssef drew. When Salma felt tired, Youssef {3} her. Finally, they finished the project. Their teacher was happy and said, \"{4} !\""}], "id": 2}, {"title": "General Revision 2", "name": "Units 4 – 5", "page": 45, "sections": [{"kind": "General Revision 2", "instr": "1. Listen and write the missing letter(s):", "items": [{"t": "mcq", "q": "1- __at 🔊", "opts": ["gr", "c", "sp", "qu"], "ans": "c", "why": "The word is “cat”.", "say": "cat"}, {"t": "mcq", "q": "2- __ook 🔊", "opts": ["gr", "qu", "sp", "c"], "ans": "c", "why": "The word is “cook”.", "say": "cook"}, {"t": "mcq", "q": "3- __ar 🔊", "opts": ["gr", "g", "c", "qu"], "ans": "c", "why": "The word is “car”.", "say": "car"}, {"t": "mcq", "q": "4- __ity 🔊", "opts": ["g", "qu", "c", "gr"], "ans": "c", "why": "The word is “city”.", "say": "city"}, {"t": "mcq", "q": "5- fa__e 🔊", "opts": ["c", "gr", "s", "k"], "ans": "c", "why": "The word is “face”.", "say": "face"}, {"t": "mcq", "q": "6- __um 🔊", "opts": ["k", "sp", "c", "g"], "ans": "g", "why": "The word is “gum”.", "say": "gum"}, {"t": "mcq", "q": "7- __o 🔊", "opts": ["g", "sp", "k", "qu"], "ans": "g", "why": "The word is “go”.", "say": "go"}, {"t": "mcq", "q": "8- do__ 🔊", "opts": ["g", "c", "k", "s"], "ans": "g", "why": "The word is “dog”.", "say": "dog"}, {"t": "mcq", "q": "9- __iraffe 🔊", "opts": ["k", "qu", "gr", "g"], "ans": "g", "why": "The word is “giraffe”.", "say": "giraffe"}, {"t": "mcq", "q": "10- E__ypt 🔊", "opts": ["qu", "k", "g", "sp"], "ans": "g", "why": "The word is “Egypt”.", "say": "Egypt"}, {"t": "mcq", "q": "11- pa__e 🔊", "opts": ["qu", "g", "s", "sp"], "ans": "g", "why": "The word is “page”.", "say": "page"}, {"t": "mcq", "q": "12- __ring 🔊", "opts": ["gr", "sp", "qu", "k"], "ans": "sp", "why": "The word is “spring”.", "say": "spring"}, {"t": "mcq", "q": "13- __plash 🔊", "opts": ["gr", "s", "g", "qu"], "ans": "s", "why": "The word is “splash”.", "say": "splash"}, {"t": "mcq", "q": "14- __reen 🔊", "opts": ["qu", "gr", "g", "c"], "ans": "g", "why": "The word is “green”.", "say": "green"}, {"t": "mcq", "q": "15- __ape 🔊", "opts": ["qu", "k", "c", "gr"], "ans": "gr", "why": "The word is “grape”.", "say": "grape"}, {"t": "mcq", "q": "16- __ass 🔊", "opts": ["qu", "gr", "k", "g"], "ans": "gr", "why": "The word is “grass”.", "say": "grass"}, {"t": "mcq", "q": "17- __een 🔊", "opts": ["g", "k", "s", "qu"], "ans": "qu", "why": "The word is “queen”.", "say": "queen"}, {"t": "mcq", "q": "18- __ow 🔊", "opts": ["c", "g", "k", "gr"], "ans": "c", "why": "The word is “cow”.", "say": "cow"}]}, {"kind": "General Revision 2", "instr": "2-Complete the sentences from the words in the box (good - trip - drank - sandwiches)", "items": [{"t": "blank", "n": 1, "accept": ["trip"], "why": "went on a trip."}, {"t": "blank", "n": 2, "accept": ["sandwiches"], "why": "ate sandwiches and chips."}, {"t": "blank", "n": 3, "accept": ["drank"], "why": "drank juice and water."}, {"t": "blank", "n": 4, "accept": ["good"], "why": "had a good day!"}], "box": ["good", "trip", "drank", "sandwiches"], "passage": "Last Monday, Grade three students went on a {1} to the zoo. They ate {2} and chips. They {3} juice and water. Everyone had a {4} day! They also watched the monkeys play. They talked about their favorite animals on the bus."}, {"kind": "General Revision 2", "instr": "2-Complete the sentences from the words in the box (pulled - fence - park - small)", "items": [{"t": "blank", "n": 1, "accept": ["park"], "why": "playing in the park."}, {"t": "blank", "n": 2, "accept": ["fence"], "why": "stuck in a fence."}, {"t": "blank", "n": 3, "accept": ["small"], "why": "the hole was small."}, {"t": "blank", "n": 4, "accept": ["pulled"], "why": "pulled the cat out."}], "box": ["pulled", "fence", "park", "small"], "passage": "Adam and Omar were playing in the {1} when they heard a cat cry. Then, they quickly followed the sound, and soon they saw the cat stuck in a {2} . Because the hole was {3} . Adam held the fence while Omar carefully {4} the cat out."}, {"kind": "General Revision 2", "instr": "2-Complete the sentences from the words in the box (team - playing - stuck - cry)", "items": [{"t": "blank", "n": 1, "accept": ["playing"], "why": "were playing."}, {"t": "blank", "n": 2, "accept": ["cry"], "why": "heard a dog cry."}, {"t": "blank", "n": 3, "accept": ["stuck"], "why": "stuck in a fence."}, {"t": "blank", "n": 4, "accept": ["team"], "why": "worked as a team."}], "box": ["team", "playing", "stuck", "cry"], "passage": "Adam and Omar were {1} in the park when they heard a dog {2} . They saw the dog {3} in a fence. Since they worked as a {4} , they saved the dog, they felt happy and proud. The dog followed them for a while. They hoped it found its owner soon."}, {"kind": "General Revision 2", "instr": "2-Complete the sentences from the words in the box (bored - knee - smiled - picture)", "items": [{"t": "blank", "n": 1, "accept": ["bored"], "why": "She went out because she was bored."}, {"t": "blank", "n": 2, "accept": ["picture"], "why": "drew a picture."}, {"t": "blank", "n": 3, "accept": ["smiled"], "why": "smiled at her friend."}, {"t": "blank", "n": 4, "accept": ["knee"], "why": "hurt her knee."}], "box": ["bored", "knee", "smiled", "picture"], "passage": "Sara went to the park because she was {1} . She drew a {2} with her pencil. She was happy and {3} at her friend. Then she fell and hurt her {4} . Sara felt sad and scared. They sat on a bench to rest. After some time, they continued playing carefully."}, {"kind": "General Revision 2", "instr": "3-Read the passage and answer the following questions:", "items": [{"t": "mcq", "q": "1. Where did my friend go yesterday? My friend ........ to the garden.", "opts": ["went", "were", "jumped"], "ans": "went", "why": "“my friend went to the garden.”"}, {"t": "mcq", "q": "2. Omar scored a ........ and felt proud.", "opts": ["mistake", "football", "goal"], "ans": "goal", "why": "“Omar scored a goal.”"}, {"t": "mcq", "q": "3. Sara fell and ........ her knee.", "opts": ["hurt", "helped", "scared"], "ans": "hurt", "why": "“Sara fell and hurt her knee.”"}, {"t": "mcq", "q": "4. What did Omar score yesterday?", "opts": ["A goal", "A mistake", "A prize"], "ans": "A goal", "why": "“Omar scored a goal.”"}, {"t": "mcq", "q": "5. What happened to Sara while playing?", "opts": ["She fell and hurt her knee.", "She scored a goal.", "She went to the garden."], "ans": "She fell and hurt her knee.", "why": "“Sara fell and hurt her knee while playing.”"}], "passage": "Yesterday, my friend went to the garden. Omar scored a goal and felt very proud. First, they wake up in the morning and get ready for school. Sara fell and hurt her knee while playing."}, {"kind": "General Revision 2", "instr": "4-Read the passage and answer the following questions:", "items": [{"t": "mcq", "q": "1. Where is the cat? The cat is ........ the table.", "opts": ["between", "under", "in"], "ans": "under", "why": "“The cat is under the table.”"}, {"t": "mcq", "q": "2. What did the children eat? They ........ sandwiches and chips.", "opts": ["ate", "played", "slept"], "ans": "ate", "why": "“Children ate sandwiches and chips.”"}, {"t": "mcq", "q": "3. How much was the ticket? The ticket ........ 20 pounds.", "opts": ["was", "jumped", "cooked"], "ans": "was", "why": "“The ticket for the bus was 20 pounds.”"}, {"t": "mcq", "q": "4. Where is the TV?", "opts": ["Between the chair and the couch.", "Under the table.", "In the bus."], "ans": "Between the chair and the couch.", "why": "“The TV is between the chair and the couch.”"}, {"t": "mcq", "q": "5. What did the children have for lunch?", "opts": ["Sandwiches and chips.", "Pizza.", "Fish."], "ans": "Sandwiches and chips.", "why": "“Children ate sandwiches and chips for lunch.”"}], "passage": "The cat is under the table. Children ate sandwiches and chips for lunch. The ticket for the bus was 20 pounds. The TV is between the chair and the couch."}, {"kind": "General Revision 2", "instr": "5-Read the passage and answer the following questions:", "items": [{"t": "mcq", "q": "1. Who drives the car? My brother ........ the car.", "opts": ["drives", "eats", "walks"], "ans": "drives", "why": "“My brother drives the car.”"}, {"t": "mcq", "q": "2. How did he feel when he won the prize?", "opts": ["sad", "unhappy", "excited"], "ans": "excited", "why": "“He was excited when he won the prize.”"}, {"t": "mcq", "q": "3. Who plays with the toys? My sister plays with ........ toys.", "opts": ["my", "his", "her"], "ans": "her", "why": "sister → her toys."}, {"t": "mcq", "q": "4. How does the brother drive the car?", "opts": ["carefully", "fast", "angrily"], "ans": "carefully", "why": "“My brother drives the car carefully.”"}, {"t": "mcq", "q": "5. When does the sister play with her toys?", "opts": ["Every day in the afternoon.", "At night.", "Every morning."], "ans": "Every day in the afternoon.", "why": "“every day in the afternoon.”"}], "passage": "My brother drives the car carefully. He was excited when he won the prize. My sister plays with her toys every day in the afternoon. We are happy. I love my brother."}, {"kind": "General Revision 2", "instr": "6-Read and answer the following questions:", "items": [{"t": "mcq", "q": "1-Why was Omar nervous?", "opts": ["Because it was his first football match.", "Because he was tired.", "Because he lost his ball."], "ans": "Because it was his first football match.", "why": "“Omar was nervous before his first football match.”"}, {"t": "mcq", "q": "2-When did Omar feel happy?", "opts": ["When his team won the game.", "Before the match.", "When he made mistakes."], "ans": "When his team won the game.", "why": "“He was happy when his team won the game.”"}], "passage": "Omar was nervous before his first football match. When the match started, he was worried about making mistakes. But after he scored a goal, Omar felt proud of himself. He was happy when his team won the game."}, {"kind": "General Revision 2", "instr": "7-Punctuate the following:", "items": [{"t": "mcq", "q": "salma had a project at school", "opts": ["Salma had a project at school", "Salma had a project at school?", "Salma had a project at school.", "salma had a project at school."], "ans": "Salma had a project at school.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "they didn't go the park", "opts": ["They didnt go the park.", "They didn't go the park.", "they didn't go the park.", "They didn't go the park?"], "ans": "They didn't go the park.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "then they started to share ideas", "opts": ["Then they started to share ideas.", "then they started to share ideas.", "Then they started to share ideas", "Then they started to share ideas?"], "ans": "Then they started to share ideas.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "youssef drew a picture", "opts": ["Youssef drew a picture?", "Youssef drew a picture", "youssef drew a picture.", "Youssef drew a picture."], "ans": "Youssef drew a picture.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "they showed care and worked well together", "opts": ["They showed care and worked well together", "They showed care and worked well together.", "They showed care and worked well together?", "they showed care and worked well together."], "ans": "They showed care and worked well together.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "ahmed donates clothes", "opts": ["Ahmed donates clothes", "Ahmed donates clothes?", "Ahmed donates clothes.", "ahmed donates clothes."], "ans": "Ahmed donates clothes.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "the boys win the football match", "opts": ["The boys win the football match", "The boys win the football match.", "The boys win the football match?", "the boys win the football match."], "ans": "The boys win the football match.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "lina hugs her friend because she cares", "opts": ["Lina hugs her friend because she cares?", "Lina hugs her friend because she cares.", "lina hugs her friend because she cares.", "Lina hugs her friend because she cares"], "ans": "Lina hugs her friend because she cares.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "the boys cheer for Omar in his football match", "opts": ["the boys cheer for Omar in his football match.", "The boys cheer for Omar in his football match.", "The boys cheer for omar in his football match.", "The boys cheer for Omar in his football match?"], "ans": "The boys cheer for Omar in his football match.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "sara shares food with her sister", "opts": ["sara shares food with her sister.", "Sara shares food with her sister?", "Sara shares food with her sister.", "Sara shares food with her sister"], "ans": "Sara shares food with her sister.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "you should tidy up your bed", "opts": ["You should tidy up your bed.", "You should tidy up your bed?", "you should tidy up your bed.", "You should tidy up your bed"], "ans": "You should tidy up your bed.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}]}], "id": 3}, {"title": "Lesson 3", "name": "Teamwork in Sports", "page": 49, "sections": [{"kind": "Classroom performance", "instr": "Activity 1 Reorder the following words to make correct sentences:", "items": [{"t": "build", "tiles": ["pass", "They", "to", "started", "the ball"], "ans": "They started to pass the ball", "end": ".", "why": "They + started + to pass + the ball."}, {"t": "build", "tiles": ["together", "They", "won"], "ans": "They won together", "end": ".", "why": "They + won + together."}, {"t": "build", "tiles": ["made", "game", "Teamwork", "the", "fun"], "ans": "Teamwork made the game fun", "end": ".", "why": "Teamwork + made + the game + fun."}]}, {"kind": "Classroom performance", "instr": "Activity 2 Find and write the odd word out:", "items": [{"t": "mcq", "q": "1- gum - page - giraffe", "opts": ["gum", "page", "giraffe"], "ans": "gum", "why": "page and giraffe have a soft g (/dʒ/); gum has a hard /g/."}, {"t": "mcq", "q": "2- Egypt - green - huge", "opts": ["Egypt", "green", "huge"], "ans": "green", "why": "Egypt and huge have a soft g (/dʒ/); green has a hard /g/."}, {"t": "mcq", "q": "3- big - huge - good", "opts": ["big", "huge", "good"], "ans": "huge", "why": "big and good have a hard /g/; huge has a soft g (/dʒ/)."}]}, {"kind": "Home performance", "instr": "Homework: Complete the text from the words in the box (scored - team - coach - football match)", "items": [{"t": "blank", "n": 1, "accept": ["football match"], "why": "They played a football match."}, {"t": "blank", "n": 2, "accept": ["coach"], "why": "The coach tells the team what to do."}, {"t": "blank", "n": 3, "accept": ["team"], "why": "Work as a team!"}, {"t": "blank", "n": 4, "accept": ["scored"], "why": "Karim scored."}], "box": ["scored", "team", "coach", "football match"], "passage": "Mazen and his friends played {1} at school. At first, they all wanted to score. Then, their {2} said, “Work as a {3} !” They started to pass the ball and help each other. Mazen passed to Karim, and Karim {4} ."}], "id": 4}, {"title": "Lesson 4", "name": "I Help My Community!", "page": 50, "sections": [{"kind": "Classroom performance", "instr": "Activity 1 Reorder the following words to make correct sentences:", "items": [{"t": "build", "tiles": ["Salma", "wants", "help", "to", "neighborhood", "her"], "ans": "Salma wants to help her neighborhood", "end": ".", "why": "Salma + wants + to help + her neighborhood."}, {"t": "build", "tiles": ["donate", "They", "and", "clothes", "toys"], "ans": "They donate clothes and toys", "end": ".", "why": "They + donate + clothes and toys."}, {"t": "build", "tiles": ["the", "makes", "Teamwork", "community", "better"], "ans": "Teamwork makes the community better", "end": ".", "why": "Teamwork + makes + the community + better."}]}, {"kind": "Classroom performance", "instr": "Activity 2 Rearrange the following sentences (write 1, 2, 3):", "items": [{"t": "mcq", "q": "Then, they plant trees near the school.", "opts": ["1", "2", "3"], "ans": "2", "why": "“Then” comes in the middle → 2."}, {"t": "mcq", "q": "Finally, they are proud to help.", "opts": ["1", "2", "3"], "ans": "3", "why": "“Finally” comes last → 3."}, {"t": "mcq", "q": "First, the children want to help their neighborhood.", "opts": ["1", "2", "3"], "ans": "1", "why": "“First” comes first → 1."}]}, {"kind": "Home performance", "instr": "Homework: Complete the text from the words in the box (clean - together - donate - flowers)", "items": [{"t": "blank", "n": 1, "accept": ["clean"], "why": "helping clean the park."}, {"t": "blank", "n": 2, "accept": ["together"], "why": "Let's work together."}, {"t": "blank", "n": 3, "accept": ["flowers"], "why": "plant flowers."}, {"t": "blank", "n": 4, "accept": ["donate"], "why": "donate books to the library."}], "box": ["clean", "together", "donate", "flowers"], "passage": "Sara: Hello, Omar. What are you doing?\nOmar: I am helping {1} the park.\nSara: That is great! Can I help too?\nOmar: Yes! Let's work {2} .\nSara: We can plant {3} .\nOmar: And we can {4} books to the school library."}], "id": 5}, {"title": "Weekly Assessment", "name": "Lessons 3 – 4", "page": 51, "sections": [{"kind": "Weekly Assessment A", "instr": "Reorder the following words to make correct sentences:", "items": [{"t": "build", "tiles": ["together", "They", "won"], "ans": "They won together", "end": ".", "why": "They + won + together."}, {"t": "build", "tiles": ["didn't", "They", "alone", "win"], "ans": "They didn't win alone", "end": ".", "why": "They + didn't win + alone."}, {"t": "build", "tiles": ["donate", "Children", "clothes", "their"], "ans": "Children donate their clothes", "end": ".", "why": "Children + donate + their clothes."}, {"t": "build", "tiles": ["wanted", "They", "all", "score", "to"], "ans": "They all wanted to score", "end": ".", "why": "They + all + wanted + to score."}]}, {"kind": "Weekly Assessment A", "instr": "Punctuate the following:", "items": [{"t": "mcq", "q": "finally, everyone is happy", "opts": ["Finally everyone is happy.", "Finally, everyone is happy.", "Finally, everyone is happy?", "finally, everyone is happy."], "ans": "Finally, everyone is happy.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "who played football at school", "opts": ["Who played football at school?", "Who played football at school", "Who played football at school.", "who played football at school?"], "ans": "Who played football at school?", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}]}, {"kind": "Weekly Assessment B", "instr": "Choose the correct answer from the words in the box (school - help - coach - team)", "items": [{"t": "blank", "n": 1, "accept": ["school"], "why": "played football at school."}, {"t": "blank", "n": 2, "accept": ["coach"], "why": "The coach said…"}, {"t": "blank", "n": 3, "accept": ["team"], "why": "Work as a team!"}, {"t": "blank", "n": 4, "accept": ["help"], "why": "help each other."}], "box": ["school", "help", "coach", "team"], "passage": "Omar and his friends played football at {1} . At first, they all wanted to score. Then, their {2} said, “Work as a {3} !” They started to pass the ball and {4} each other."}, {"kind": "Weekly Assessment B", "instr": "Punctuate the following:", "items": [{"t": "mcq", "q": "first, they clean the street", "opts": ["first, they clean the street.", "First they clean the street.", "First, they clean the street?", "First, they clean the street."], "ans": "First, they clean the street.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "who scored the goal", "opts": ["Who scored the goal", "Who scored the goal?", "who scored the goal?", "Who scored the goal."], "ans": "Who scored the goal?", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}]}, {"kind": "Weekly Assessment C", "instr": "Choose the correct answer from the words in the box (teamwork - neighborhood - proud - happy)", "items": [{"t": "blank", "n": 1, "accept": ["neighborhood"], "why": "help their neighborhood."}, {"t": "blank", "n": 2, "accept": ["happy"], "why": "Everyone is happy."}, {"t": "blank", "n": 3, "accept": ["teamwork"], "why": "Teamwork makes the community better."}, {"t": "blank", "n": 4, "accept": ["proud"], "why": "They are proud to help."}], "box": ["teamwork", "neighborhood", "proud", "happy"], "passage": "Hady and Salma want to help their {1} . Everyone is {2} . Their teacher says, “Well done!” {3} makes the community better. Hady and Salma smile. They are {4} to help."}, {"kind": "Weekly Assessment C", "instr": "Punctuate the following:", "items": [{"t": "mcq", "q": "they are proud to help", "opts": ["They are proud to help", "they are proud to help.", "They are proud to help?", "They are proud to help."], "ans": "They are proud to help.", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}, {"t": "mcq", "q": "how did the team feel after the goal", "opts": ["How did the team feel after the goal?", "how did the team feel after the goal?", "How did the team feel after the goal", "How did the team feel after the goal."], "ans": "How did the team feel after the goal?", "why": "Every sentence starts with a capital letter and ends with a full stop (.) — or a question mark (?) for a question.", "sub": "Choose the correctly punctuated sentence:"}]}], "id": 6}];
+        const LESSON_BY_ID = {};
+        LESSONS.forEach(l => { LESSON_BY_ID[l.id] = l; });
+
+        let currentMode = 'solo', runMode = 'solo';
+        let currentLessonId = null, currentSecIdx = null;
+        let questionTime = 30;
+        let teams = [];
+        let running = false;
+        let countdownTimer = null, endTimeout = null;
+        let lastResultText = '';
+
+        const screens = document.querySelectorAll('.screen');
+        const arena = document.getElementById('arena');
+
+        function esc(s) {
+            return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+        function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+        function onTap(el, fn) {
+            if (window.PointerEvent) {
+                el.addEventListener('pointerdown', e => { e.preventDefault(); fn(); });
+            } else {
+                el.addEventListener('touchstart', e => { e.preventDefault(); fn(); }, { passive: false });
+                el.addEventListener('mousedown', fn);
+            }
+        }
+
+        function switchScreen(screenId) {
+            screens.forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            document.body.classList.toggle('compact', screenId === 'game-screen' && (runMode === 'comp' || window.innerWidth < 768));
+            window.scrollTo(0, 0);
+        }
+
+        function kindClass(kind) { return kind === 'Home performance' ? 'hp' : (kind === 'Warm-up Activity' ? 'wu' : ''); }
+
+        function renderMenu() {
+            const grid = document.getElementById('lessons-grid');
+            grid.innerHTML = '';
+            LESSONS.forEach(l => {
+                const card = document.createElement('div');
+                card.className = 'game-card lesson-card';
+                const num = /^Lesson (\d)/.exec(l.title);
+                card.innerHTML = (num ? '<div class="lesson-num">' + num[1] + '</div>' : '<i class="fas ' + (l.title.indexOf('Review') === 0 ? 'fa-star' : 'fa-clipboard-check') + '"></i>') +
+                    '<h3>' + esc(l.title) + '<span class="sub">' + esc(l.name) + '</span></h3>' +
+                    '<span class="pg">Book page ' + l.page + '</span>';
+                card.addEventListener('click', () => openLesson(l.id));
+                grid.appendChild(card);
+            });
+        }
+
+        function openLesson(id) {
+            currentLessonId = id;
+            const l = LESSON_BY_ID[id];
+            document.getElementById('lesson-title').innerText = l.title + ': ' + l.name;
+            document.getElementById('lesson-desc').innerText = 'Book page ' + l.page + ' — choose an exercise or play the whole lesson.';
+            const list = document.getElementById('sec-list');
+            list.innerHTML = '';
+            l.sections.forEach((s, i) => {
+                const graded = s.items.filter(it => it.t !== 'write').length;
+                const row = document.createElement('div');
+                row.className = 'sec-item';
+                row.innerHTML = '<span class="k ' + kindClass(s.kind) + '">' + esc(s.kind) + '</span>' +
+                    '<span class="i">' + esc(s.instr) + '</span>' +
+                    '<span class="n">' + (graded ? s.items.length + ' Q' : '✍ writing') + '</span>';
+                row.addEventListener('click', () => startPlay(id, i));
+                list.appendChild(row);
+            });
+            switchScreen('lesson-screen');
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.getElementById('mode-solo').classList.toggle('active', mode === 'solo');
+            document.getElementById('mode-comp').classList.toggle('active', mode === 'comp');
+            document.getElementById('comp-settings').style.display = mode === 'comp' ? 'grid' : 'none';
+            document.getElementById('mode-hint').innerHTML = mode === 'solo'
+                ? '<i class="fas fa-info-circle"></i> Same questions, same order as the book. Writing tasks show a model answer.'
+                : '<i class="fas fa-info-circle"></i> Two teams answer the same book questions side by side. Writing tasks are skipped. Highest score wins; if equal, the faster team wins.';
+        }
+
+        // ---------- building the question list ----------
+        function collectItems(lesson, secIdx, comp) {
+            const out = [];
+            lesson.sections.forEach((s, si) => {
+                if (secIdx !== null && secIdx !== si) return;
+                s.items.forEach(it => {
+                    if (comp && it.t === 'write') return;
+                    out.push({ item: it, sec: s, secKey: si });
+                });
+            });
+            return out;
+        }
+
+        function createTeam(i, name, questions, solo) {
+            const panel = document.createElement('div');
+            panel.className = 'team-panel ' + (solo ? 'solo' : 't' + i);
+            panel.innerHTML = `
+                <div class="team-head"><span class="team-name"></span><span class="team-score">0</span></div>
+                <div class="team-meta">
+                    <span>Question <span class="q-num">0</span> / ${questions.length}</span>
+                    <span class="timer-num">${questionTime}</span>
+                </div>
+                <div class="timer-bar"><div class="timer-fill"></div></div>
+                <div class="sec-head"></div>
+                <div class="q-extra"></div>
+                <div class="question-text">Get ready...</div>
+                <div class="answer-zone"></div>
+                <div class="ans-note"></div>
+                <div class="team-flash"></div>
+                <div class="team-done">
+                    <i class="fas fa-flag-checkered" style="font-size:4rem;color:var(--team)"></i>
+                    <h3 style="font-size:1.6rem;color:var(--team-dark)">Finished!</h3>
+                    <div class="done-score" style="font-size:1.3rem;font-weight:800"></div>
+                    <div style="color:#64748b">Waiting for the other team...</div>
+                </div>`;
+            panel.querySelector('.team-name').textContent = name;
+            arena.appendChild(panel);
+            const q = s => panel.querySelector(s);
+            return {
+                idx: i, name, questions, solo,
+                score: 0, graded: questions.filter(x => x.item.t !== 'write').length,
+                qIndex: 0, mistakes: [], fills: {},
+                timeouts: [], timerInt: null,
+                qStart: 0, timeUsed: 0, locked: true, finished: false,
+                el: {
+                    panel, score: q('.team-score'), qNum: q('.q-num'),
+                    timerNum: q('.timer-num'), timerFill: q('.timer-fill'),
+                    head: q('.sec-head'), extra: q('.q-extra'), question: q('.question-text'),
+                    zone: q('.answer-zone'), note: q('.ans-note'),
+                    flash: q('.team-flash'), doneScore: q('.done-score')
+                }
+            };
+        }
+
+        function clearTeam(team) {
+            team.timeouts.forEach(clearTimeout); team.timeouts = [];
+            if (team.timerInt) { clearInterval(team.timerInt); team.timerInt = null; }
+        }
+
+        function stopAll() {
+            running = false;
+            if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
+            if (endTimeout) { clearTimeout(endTimeout); endTimeout = null; }
+            document.getElementById('countdown').classList.remove('show');
+            teams.forEach(clearTeam);
+        }
+
+        function returnToLesson() {
+            stopAll();
+            if (currentLessonId) openLesson(currentLessonId); else switchScreen('main-menu');
+        }
+
+        function playTitle() {
+            const l = LESSON_BY_ID[currentLessonId];
+            let t = l.title + ' – ' + l.name;
+            if (currentSecIdx !== null) { const s = l.sections[currentSecIdx]; t += ' | ' + s.kind + ': ' + s.instr; }
+            return t;
+        }
+
+        function startPlay(lessonId, secIdx) {
+            try { if (audioCtx) audioCtx.resume(); } catch (e) {}
+            stopAll();
+            currentLessonId = lessonId;
+            currentSecIdx = secIdx;
+            runMode = currentMode;
+            const lesson = LESSON_BY_ID[lessonId];
+            const items = collectItems(lesson, secIdx, runMode === 'comp');
+            if (!items.length) {
+                alertBox('This exercise is a writing task — play it in "Play Now" mode to see the model answer.');
+                return;
+            }
+            arena.innerHTML = '';
+            const titleTxt = lesson.title + ': ' + lesson.name;
+
+            if (runMode === 'solo') {
+                questionTime = 0;
+                arena.className = 'arena solo';
+                teams = [createTeam(0, '🎯 Your Score', items, true)];
+                document.getElementById('comp-title').innerText = titleTxt;
+                document.getElementById('comp-time-wrap').style.display = 'none';
+                document.getElementById('btn-stop').innerHTML = '<i class="fas fa-arrow-left"></i> Back';
+                switchScreen('game-screen');
+                running = true;
+                loadQuestion(teams[0]);
+                return;
+            }
+            questionTime = parseInt(document.getElementById('q-time').value, 10) || 30;
+            const names = [val('team1-name') || 'Team A', val('team2-name') || 'Team B'];
+            arena.className = 'arena';
+            teams = [0, 1].map(i => createTeam(i, names[i], items, false));
+            document.getElementById('comp-title').innerText = '🏆 ' + titleTxt;
+            document.getElementById('comp-time-wrap').style.display = '';
+            document.getElementById('comp-time-label').innerText = questionTime;
+            document.getElementById('btn-stop').innerHTML = '<i class="fas fa-stop"></i> Stop';
+            switchScreen('game-screen');
+            runCountdown(() => { running = true; teams.forEach(t => loadQuestion(t)); });
+        }
+
+        function alertBox(msg) {
+            const d = document.getElementById('lesson-desc');
+            d.innerHTML = '<span style="color:#b91c1c;font-weight:700">' + esc(msg) + '</span>';
+        }
+
+        function runCountdown(done) {
+            const ov = document.getElementById('countdown');
+            let n = 3;
+            ov.innerText = n;
+            ov.classList.add('show');
+            playSound('tick');
+            countdownTimer = setInterval(() => {
+                n--;
+                if (n > 0) { ov.innerText = n; playSound('tick'); }
+                else if (n === 0) { ov.innerText = 'GO!'; playSound('go'); }
+                else { clearInterval(countdownTimer); countdownTimer = null; ov.classList.remove('show'); done(); }
+            }, 800);
+        }
+
+        // ---------- word-box passages ----------
+        function fillsFor(team, secKey) {
+            if (!team.fills[secKey]) team.fills[secKey] = {};
+            return team.fills[secKey];
+        }
+        function usedWords(team, secKey) {
+            const f = fillsFor(team, secKey);
+            return Object.keys(f).map(k => f[k].word);
+        }
+        function expectedWord(team, q) {
+            const used = usedWords(team, q.secKey);
+            return q.item.accept.find(a => used.indexOf(a) < 0) || q.item.accept[0];
+        }
+        function renderPassage(team, q, curN) {
+            const s = q.sec;
+            const p = document.createElement('div');
+            p.className = 'q-passage';
+            if (s.items[0].t !== 'blank') {
+                p.innerHTML = '<b><i class="fas fa-book-open"></i> Read:</b>';
+                p.appendChild(document.createTextNode(s.passage));
+                return p;
+            }
+            const f = fillsFor(team, q.secKey);
+            const html = esc(s.passage).replace(/\{(\d+)\}/g, (m, n) => {
+                n = +n;
+                if (f[n]) return '<span class="blank ' + (f[n].ok ? 'ok' : 'bad') + '">(' + n + ') ' + esc(f[n].word) + '</span>';
+                return '<span class="blank' + (n === curN ? ' cur' : '') + '">(' + n + ') ........</span>';
+            });
+            p.innerHTML = html;
+            return p;
+        }
+        function blankSentence(q) {
+            const txt = q.sec.passage;
+            const parts = txt.split(/(?<=[.!?”])\s+/);
+            const hit = parts.find(x => x.indexOf('{' + q.item.n + '}') >= 0) || txt;
+            return '(' + q.item.n + ') ' + hit.replace(/\{(\d+)\}/g, (m, n) => +n === q.item.n ? '________' : '....');
+        }
+
+        function renderHead(team, q) {
+            const s = q.sec, it = q.item;
+            team.el.head.innerHTML = '<span class="k ' + kindClass(s.kind) + '">' + esc(s.kind) + '</span><div class="ins"></div>' +
+                (it.sub ? '<div class="sub"></div>' : '');
+            team.el.head.querySelector('.ins').textContent = s.instr;
+            if (it.sub) team.el.head.querySelector('.sub').textContent = it.sub;
+
+            const box = team.el.extra;
+            box.innerHTML = '';
+            if (s.passage) box.appendChild(renderPassage(team, q, it.n));
+            const img = it.img || s.img;
+            if (img) {
+                const im = document.createElement('img');
+                im.className = 'q-img' + (it.img ? '' : ' wide'); im.src = img; im.alt = 'Picture';
+                box.appendChild(im);
+            }
+            if (it.say) {
+                const sb = document.createElement('button');
+                sb.className = 'say-btn'; sb.innerHTML = '🔊 Listen';
+                sb.addEventListener('click', () => speak(it.say));
+                box.appendChild(sb);
+            }
+            if (s.box) {
+                const used = usedWords(team, q.secKey);
+                const b = document.createElement('div');
+                b.className = 'q-box';
+                s.box.forEach(w => { const sp = document.createElement('span'); sp.textContent = w; if (used.indexOf(w) >= 0) sp.classList.add('used'); b.appendChild(sp); });
+                box.appendChild(b);
+            }
+        }
+
+        function loadQuestion(team) {
+            if (!running) return;
+            clearTeam(team);
+            if (team.qIndex >= team.questions.length) { finishTeam(team); return; }
+            const q = team.questions[team.qIndex];
+            const it = q.item, el = team.el;
+            team.locked = false;
+            el.qNum.innerText = team.qIndex + 1;
+            el.note.textContent = '';
+            team.sel = null;
+            renderHead(team, q);
+            if (it.say && team.solo) setTimeout(() => speak(it.say), 350);
+            el.question.classList.remove('small');
+            el.zone.innerHTML = '';
+
+            if (it.t === 'mcq') {
+                el.question.innerText = it.q;
+                if (it.q.length > 45) el.question.classList.add('small');
+                const grid = document.createElement('div');
+                grid.className = 'options-grid' + (it.opts.length === 2 ? ' two' : '');
+                const letters = ['a)', 'b)', 'c)', 'd)'];
+                it.opts.forEach((opt, i) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.dataset.opt = opt;
+                    if (q.sec.abcd) { const l = document.createElement('span'); l.className = 'lbl'; l.textContent = letters[i]; btn.appendChild(l); }
+                    btn.appendChild(document.createTextNode(opt));
+                    onTap(btn, () => selectOpt(team, btn));
+                    grid.appendChild(btn);
+                });
+                el.zone.appendChild(grid);
+                addCheck(team, () => { const s = team.sel; if (s) handleAnswer(team, s === it.ans, s, q); });
+            } else if (it.t === 'blank') {
+                el.question.innerText = 'Choose the word for blank (' + it.n + '):';
+                el.question.classList.add('small');
+                const used = usedWords(team, q.secKey);
+                const grid = document.createElement('div');
+                grid.className = 'options-grid';
+                q.sec.box.forEach(w => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.dataset.opt = w;
+                    btn.textContent = w;
+                    if (used.indexOf(w) >= 0) { btn.disabled = true; btn.classList.add('used'); }
+                    else onTap(btn, () => selectOpt(team, btn));
+                    grid.appendChild(btn);
+                });
+                el.zone.appendChild(grid);
+                addCheck(team, () => { const s = team.sel; if (s) handleAnswer(team, it.accept.indexOf(s) >= 0, s, q); });
+            } else if (it.t === 'build') {
+                el.question.innerText = it.tiles.join('  –  ') + (it.end || '.');
+                el.question.classList.add('small');
+                startBuild(team, q);
+            } else if (it.t === 'write') {
+                el.question.innerText = it.q;
+                el.question.classList.add('small');
+                const wrap = document.createElement('div');
+                wrap.className = 'write-wrap';
+                wrap.innerHTML = '<div class="write-tag">✍ Writing task — write your answer in your book, then compare with the model answer (not scored).</div>' +
+                    '<textarea class="write-area" placeholder="You can type your answer here..."></textarea>' +
+                    '<button class="btn-section show-model" style="margin:0"><i class="fas fa-eye"></i> Show model answer</button>' +
+                    '<div class="model-box"></div>' +
+                    '<button class="btn-section next-btn" style="margin:0;display:none"><i class="fas fa-arrow-right"></i> Next</button>';
+                wrap.querySelector('.model-box').textContent = it.model;
+                wrap.querySelector('.show-model').addEventListener('click', e => {
+                    wrap.querySelector('.model-box').classList.add('show');
+                    e.currentTarget.style.display = 'none';
+                    wrap.querySelector('.next-btn').style.display = '';
+                });
+                wrap.querySelector('.next-btn').addEventListener('click', () => {
+                    if (team.locked) return;
+                    team.locked = true; team.qIndex++; loadQuestion(team);
+                });
+                el.zone.appendChild(wrap);
+            }
+            startTimer(team, q);
+        }
+
+        function selectOpt(team, btn) {
+            if (team.locked || btn.disabled) return;
+            team.el.zone.querySelectorAll('.option-btn.selected').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            team.sel = btn.dataset.opt;
+            const c = team.el.zone.querySelector('.btn-check');
+            if (c) c.disabled = false;
+        }
+        function addCheck(team, fn) {
+            const row = document.createElement('div');
+            row.className = 'check-row';
+            const b = document.createElement('button');
+            b.className = 'btn-check';
+            b.innerHTML = '<i class="fas fa-check"></i> Check';
+            b.disabled = true;
+            b.addEventListener('click', () => { if (!team.locked && !b.disabled) fn(); });
+            row.appendChild(b);
+            team.el.zone.appendChild(row);
+            return b;
+        }
+        let voices = [];
+        function loadVoices() { try { voices = speechSynthesis.getVoices().filter(v => /^en/i.test(v.lang)); } catch (e) {} }
+        try { loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; } catch (e) {}
+        function speak(text) {
+            try {
+                speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US'; u.rate = 0.8;
+                const v = voices.find(v => /en-(US|GB)/i.test(v.lang)); if (v) u.voice = v;
+                speechSynthesis.speak(u);
+            } catch (e) {}
+        }
+
+        function normTxt(s) {
+            return String(s).replace(/[’‘`´]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim();
+        }
+        function checkTyped(v, it) {
+            let a = normTxt(v);
+            if (it.case) return it.accept.some(x => normTxt(x) === a);
+            a = a.toLowerCase().replace(/[.!]+$/, '').trim();
+            return it.accept.some(x => normTxt(x).toLowerCase().replace(/[.!]+$/, '') === a);
+        }
+
+        function startBuild(team, q) {
+            const it = q.item;
+            const wrap = document.createElement('div');
+            wrap.className = 'build-wrap';
+            wrap.style.display = 'flex';
+            wrap.innerHTML = '<div class="build-line"></div><div class="build-answer"></div>' +
+                '<div class="build-pool"></div><div class="build-hint">Tap the words in order. Tap a word in the line to send it back.</div>';
+            const line = wrap.querySelector('.build-line');
+            const pool = wrap.querySelector('.build-pool');
+            const placed = [];
+            it.tiles.forEach(word => {
+                const tile = document.createElement('button');
+                tile.className = 'tile';
+                tile.textContent = word;
+                onTap(tile, () => {
+                    if (team.locked || tile.disabled) return;
+                    if (tile.parentNode === pool) {
+                        line.appendChild(tile); placed.push(tile);
+                    } else {
+                        pool.appendChild(tile); placed.splice(placed.indexOf(tile), 1);
+                    }
+                    chk.disabled = placed.length !== it.tiles.length;
+                });
+                pool.appendChild(tile);
+            });
+            team.el.zone.appendChild(wrap);
+            const chk = addCheck(team, () => {
+                if (placed.length !== it.tiles.length) return;
+                const built = placed.map(b => b.textContent).join(' ');
+                handleAnswer(team, built.toLowerCase() === it.ans.toLowerCase(), built + (it.end || '.'), q);
+            });
+        }
+
+        function startTimer(team, q) {
+            team.qStart = performance.now();
+            if (!questionTime) return;
+            const total = questionTime * 1000;
+            const fill = team.el.timerFill, num = team.el.timerNum;
+            fill.classList.remove('warn', 'danger');
+            fill.style.width = '100%';
+            num.innerText = questionTime;
+            team.timerInt = setInterval(() => {
+                const left = Math.max(0, total - (performance.now() - team.qStart));
+                const pct = left / total * 100;
+                fill.style.width = pct + '%';
+                fill.classList.toggle('warn', pct <= 50 && pct > 25);
+                fill.classList.toggle('danger', pct <= 25);
+                num.innerText = Math.ceil(left / 1000);
+                if (left <= 0) handleAnswer(team, false, 'Time up', q);
+            }, 100);
+        }
+
+        function flashTeam(team, ok, timeout) {
+            const f = team.el.flash;
+            const icon = ok ? 'fa-check-circle' : (timeout ? 'fa-hourglass-end' : 'fa-times-circle');
+            f.className = 'team-flash show ' + (ok ? 'correct' : 'wrong');
+            f.innerHTML = '<i class="fas ' + icon + '"></i>';
+            setTimeout(() => f.classList.remove('show'), 650);
+        }
+
+        function correctText(q) {
+            const it = q.item;
+            if (it.t === 'mcq') return it.ans;
+            if (it.t === 'build') return it.ans + (it.end || '.');
+            if (it.t === 'blank') return '';
+            return '';
+        }
+        function mistakeLabel(q) {
+            const it = q.item;
+            if (it.t === 'blank') return blankSentence(q);
+            if (it.t === 'build') return 'Rearrange: ' + it.tiles.join(' – ');
+            if (it.img && /^Picture/.test(it.q)) return it.q + ' (' + q.sec.instr + ')';
+            return it.q;
+        }
+
+        function handleAnswer(team, isCorrect, chosen, q) {
+            if (team.locked || !running) return;
+            team.locked = true;
+            const it = q.item;
+            const spent = performance.now() - team.qStart;
+            team.timeUsed += questionTime ? Math.min(questionTime * 1000, spent) : spent;
+            clearTeam(team);
+
+            let correct = correctText(q);
+            if (it.t === 'blank') {
+                correct = isCorrect ? chosen : expectedWord(team, q);
+                fillsFor(team, q.secKey)[it.n] = { word: correct, ok: isCorrect };
+                // refresh passage + box to show the filled word
+                renderHead(team, q);
+                const cur = team.el.extra.querySelector('.blank.cur'); if (cur) cur.classList.remove('cur');
+            }
+
+            if (isCorrect) {
+                playSound('correct');
+                team.score++;
+                team.el.score.innerText = team.score;
+            } else {
+                playSound('wrong');
+                team.mistakes.push({ q: mistakeLabel(q), correct: correct });
+            }
+            flashTeam(team, isCorrect, chosen === 'Time up');
+
+            const zone = team.el.zone;
+            const chk = zone.querySelector('.btn-check'); if (chk) chk.parentNode.remove();
+            if (it.t === 'mcq' || it.t === 'blank') {
+                zone.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    btn.classList.remove('selected');
+                    if (btn.dataset.opt === correct) btn.classList.add('correct');
+                    else if (btn.dataset.opt === chosen && !isCorrect) btn.classList.add('wrong');
+                });
+            } else if (it.t === 'build') {
+                const line = zone.querySelector('.build-line');
+                line.classList.add(isCorrect ? 'ok' : 'bad');
+                zone.querySelectorAll('.tile').forEach(b => b.disabled = true);
+            }
+            const note = document.createElement('div');
+            note.className = 'why-note show ' + (isCorrect ? 'ok' : 'bad');
+            const hd = document.createElement('span'); hd.className = 'hd';
+            hd.textContent = isCorrect ? '✅ Correct! Well done.' : (chosen === 'Time up' ? '⏰ Time is up! ' : '❌ Not correct. ') + (isCorrect ? '' : 'The correct answer is: ' + correct);
+            note.appendChild(hd);
+            const why = it.why || '';
+            if (why) { const ex = document.createElement('span'); ex.className = 'ex'; ex.textContent = why; note.appendChild(ex); }
+            zone.appendChild(note);
+            const next = () => { team.qIndex++; loadQuestion(team); };
+            if (team.solo) {
+                const row = document.createElement('div'); row.className = 'check-row';
+                const nb = document.createElement('button'); nb.className = 'btn-next';
+                nb.innerHTML = (team.qIndex + 1 < team.questions.length ? 'Next <i class="fas fa-arrow-right"></i>' : 'See my result <i class="fas fa-flag-checkered"></i>');
+                nb.addEventListener('click', () => { nb.disabled = true; next(); });
+                row.appendChild(nb); zone.appendChild(row);
+                setTimeout(() => { try { note.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (e) {} }, 60);
+            } else {
+                team.timeouts.push(setTimeout(next, isCorrect ? 2200 : 3600));
+            }
+        }
+
+        function finishTeam(team) {
+            if (team.finished) return;
+            team.finished = true;
+            team.locked = true;
+            if (team.solo) { endTimeout = setTimeout(endSolo, 300); return; }
+            team.el.timerFill.style.width = '0%';
+            team.el.doneScore.innerText = 'Score: ' + team.score + ' / ' + team.graded;
+            team.el.panel.classList.add('finished');
+            if (teams.every(t => t.finished)) endTimeout = setTimeout(endCompetition, 1200);
+        }
+
+        function mistakesHtml(list) {
+            if (!list.length) return '<div style="color:var(--success);font-weight:800;font-size:1.3rem;text-align:center">Excellent! No mistakes. 🌟</div>';
+            return list.map(m => `<div class="mistake-item"><div class="mistake-q">${esc(m.q)}</div><div class="mistake-a"><i class="fas fa-check"></i> Correct Answer: ${esc(m.correct)}</div></div>`).join('');
+        }
+
+        function endSolo() {
+            stopAll();
+            const t = teams[0];
+            document.getElementById('final-score').innerText = t.score;
+            document.getElementById('final-total').innerText = t.graded;
+            document.getElementById('mistakes-container').innerHTML = t.graded ? mistakesHtml(t.mistakes)
+                : '<div style="text-align:center;font-weight:700;color:#475569">✍ Writing task finished — compare your answer with the model answer. 👏</div>';
+            const input = document.getElementById('student-name-input');
+            input.value = '';
+            input.classList.remove('input-error');
+            if (t.graded && t.score === t.graded) playSound('win');
+            switchScreen('solo-results');
+        }
+
+        function endCompetition() {
+            stopAll();
+            const [a, b] = teams;
+            let winner = null, byTime = false;
+            if (a.score !== b.score) winner = a.score > b.score ? a : b;
+            else if (Math.abs(a.timeUsed - b.timeUsed) >= 100) { winner = a.timeUsed < b.timeUsed ? a : b; byTime = true; }
+            const banner = document.getElementById('winner-banner');
+            if (winner) {
+                banner.innerHTML = '🏆 Winner: ' + esc(winner.name) +
+                    (byTime ? '<div style="font-size:1rem;color:#64748b;font-weight:600;margin-top:6px">Same score — won by faster time</div>' : '');
+                lastResultText = 'Winner: ' + winner.name + (byTime ? ' (faster time)' : '');
+                playSound('win');
+            } else {
+                banner.innerHTML = "🤝 It's a Draw!";
+                lastResultText = "It's a draw";
+            }
+            const cards = document.getElementById('score-cards');
+            cards.innerHTML = '';
+            teams.forEach(t => {
+                const card = document.createElement('div');
+                card.className = 'score-card t' + t.idx + (winner === t ? ' win' : '');
+                card.innerHTML = `
+                    <h4>${winner === t ? '🏆 ' : ''}${esc(t.name)}</h4>
+                    <div class="big">${t.score} / ${t.graded}</div>
+                    <div class="meta"><i class="fas fa-stopwatch"></i> Time: ${(t.timeUsed / 1000).toFixed(1)}s</div>
+                    <div class="results-list">${mistakesHtml(t.mistakes)}</div>`;
+                cards.appendChild(card);
+            });
+            document.getElementById('class-name-input').value = '';
+            switchScreen('results-screen');
+        }
+
+        function resultHeader() {
+            return '📘 ' + GRADE_LABEL + ' - ' + UNIT_NAME + '\n📝 ' + playTitle() + '\n';
+        }
+        function openWhatsApp(message) {
+            window.open('https://wa.me/' + TEACHER_PHONE + '?text=' + encodeURIComponent(message), '_blank');
+        }
+        function sendSoloResult() {
+            const input = document.getElementById('student-name-input');
+            const name = input.value.trim();
+            if (!name) {
+                input.classList.add('input-error');
+                input.focus();
+                setTimeout(() => input.classList.remove('input-error'), 500);
+                return;
+            }
+            const t = teams[0];
+            openWhatsApp('📚 *Result*\n👤 Student: ' + name + '\n' + resultHeader() + '✅ Score: ' + t.score + ' / ' + t.graded);
+        }
+        function sendCompResult() {
+            if (teams.length < 2) return;
+            const cls = val('class-name-input');
+            const [a, b] = teams;
+            openWhatsApp('🏆 *Competition Result*\n' + (cls ? '🏫 Class: ' + cls + '\n' : '') + resultHeader() + '\n' +
+                '🔵 ' + a.name + ': ' + a.score + ' / ' + a.graded + ' (' + (a.timeUsed / 1000).toFixed(1) + 's)\n' +
+                '🟠 ' + b.name + ': ' + b.score + ' / ' + b.graded + ' (' + (b.timeUsed / 1000).toFixed(1) + 's)\n\n' +
+                '🥇 ' + lastResultText);
+        }
+
+        renderMenu();
+        setMode('solo');
+
+    </script>
+
+</body>
+</html>
