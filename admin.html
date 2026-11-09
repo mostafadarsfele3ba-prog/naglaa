@@ -83,7 +83,7 @@ input:focus, select:focus { border-color: var(--p); }
 <div id="dash" class="hide">
     <header>
         <div class="logo">NY</div>
-        <h1>طلبات الطلاب<small>Ms. Naglaa Yehia</small></h1>
+        <h1>حسابات الطلاب<small>Ms. Naglaa Yehia</small></h1>
         <div class="sp"></div>
         <button class="hbtn" id="btn-refresh" title="تحديث">⟳</button>
         <button class="hbtn" id="btn-menu">⋮</button>
@@ -95,11 +95,10 @@ input:focus, select:focus { border-color: var(--p); }
             <div class="stat blocked" data-st="blocked"><b id="n-blocked">0</b><span>موقوف</span></div>
         </div>
         <div class="card" style="padding:14px">
-            <div class="chips" id="grade-chips"></div>
-            <div class="tools">
-                <input id="search" placeholder="🔍 بحث بالاسم أو الرقم">
+                        <div class="tools">
+                <input id="search" placeholder="🔍 بحث بالاسم أو اسم المستخدم">
                 <button class="btn" id="btn-approve-all" style="background:var(--ok);box-shadow:0 4px 0 #15803d">✔ قبول كل المنتظرين</button>
-                <button class="btn" id="btn-add">＋ إضافة طالب</button>
+                <button class="btn" id="btn-add">＋ إضافة حساب</button>
             </div>
         </div>
         <div id="list"></div>
@@ -115,7 +114,7 @@ input:focus, select:focus { border-color: var(--p); }
     const API = window.NY_API || '';
     const $ = id => document.getElementById(id);
     const ST = { pending: 'في الانتظار', approved: 'مقبول', blocked: 'موقوف' };
-    let PASS = '', GRADES = {}, students = [], fStatus = 'pending', fGrade = '', busy = false;
+    let PASS = '', accounts = [], fStatus = 'pending', busy = false;
 
     function esc(t) { const d = document.createElement('div'); d.textContent = t == null ? '' : t; return d.innerHTML; }
     function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2600); }
@@ -124,13 +123,16 @@ input:focus, select:focus { border-color: var(--p); }
         const d = new Date(iso); if (isNaN(d)) return '—';
         return d.toLocaleDateString('ar-EG', { day: 'numeric', month: 'short' }) + ' ' + d.toLocaleTimeString('ar-EG', { hour: 'numeric', minute: '2-digit' });
     }
+    async function raw(body) {
+        const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+        return r.json();
+    }
     async function call(action, extra) {
-        const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(Object.assign({ action: action, pass: PASS }, extra || {})) });
-        const j = await r.json();
+        const j = await raw(Object.assign({ action: action, pass: PASS }, extra || {}));
         if (j.error === 'bad_pass') { logout('انتهت الجلسة، ادخل كلمة المرور مرة أخرى.'); throw new Error('bad_pass'); }
         return j;
     }
-    const ERR = { bad_phone: 'رقم الموبايل غير صحيح', bad_name: 'اكتب اسم الطالب', exists: 'رقم الموبايل ده مسجل بالفعل', short_pass: 'كلمة المرور قصيرة (4 أحرف على الأقل)', not_found: 'الطالب غير موجود', locked: 'محاولات كثيرة خاطئة، انتظر 10 دقائق' };
+    const ERR = { bad_username: 'اسم المستخدم من 3 إلى 20 حرف إنجليزي أو أرقام', bad_name: 'اكتب الاسم الثلاثي', username_taken: 'اسم المستخدم مستخدم بالفعل', bad_phone: 'رقم الموبايل غير صحيح', short_pass: 'كلمة المرور قصيرة (4 على الأقل)', not_found: 'الحساب غير موجود', locked: 'محاولات كثيرة خاطئة، انتظر 10 دقائق' };
 
     /* ---------- login ---------- */
     async function login() {
@@ -139,12 +141,9 @@ input:focus, select:focus { border-color: var(--p); }
         if (!API || /PASTE/.test(API)) { $('login-err').textContent = 'الموقع غير مربوط بالخادم بعد (config.js).'; return; }
         $('btn-login').classList.add('loading'); $('login-err').textContent = '';
         try {
-            const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'adminLogin', pass: p }) }).then(x => x.json());
-            if (r.ok) {
-                PASS = p; GRADES = r.grades || {};
-                try { sessionStorage.setItem('ny_admin', p); } catch (e) {}
-                showDash();
-            } else $('login-err').textContent = r.error === 'locked' ? ERR.locked : 'كلمة المرور غير صحيحة';
+            const r = await raw({ action: 'adminLogin', pass: p });
+            if (r.ok) { PASS = p; try { sessionStorage.setItem('ny_admin', p); } catch (e) {} showDash(); }
+            else $('login-err').textContent = r.error === 'locked' ? ERR.locked : 'كلمة المرور غير صحيحة';
         } catch (e) { $('login-err').textContent = 'تعذر الاتصال، تأكد من الإنترنت.'; }
         $('btn-login').classList.remove('loading');
     }
@@ -157,46 +156,34 @@ input:focus, select:focus { border-color: var(--p); }
     $('pass').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
 
     /* ---------- dashboard ---------- */
-    function showDash() {
-        $('login').classList.add('hide'); $('dash').classList.remove('hide');
-        const chips = $('grade-chips');
-        chips.innerHTML = '<button class="chip on" data-g="">كل الصفوف</button>' +
-            Object.keys(GRADES).map(g => '<button class="chip" data-g="' + g + '">' + esc(GRADES[g]) + '</button>').join('');
-        chips.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
-            fGrade = c.dataset.g; chips.querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === c)); render();
-        }));
-        load();
-    }
+    function showDash() { $('login').classList.add('hide'); $('dash').classList.remove('hide'); load(); }
     async function load(quiet) {
         if (busy) return; busy = true;
         if (!quiet) $('list').innerHTML = '<div class="empty">جاري التحميل…</div>';
-        try {
-            const r = await call('adminList');
-            if (r.ok) { students = r.students || []; GRADES = r.grades || GRADES; render(); }
-        } catch (e) { if (e.message !== 'bad_pass') $('list').innerHTML = '<div class="empty">تعذر الاتصال، اضغط ⟳ للمحاولة مرة أخرى.</div>'; }
+        try { const r = await call('adminList'); if (r.ok) { accounts = r.accounts || []; render(); } }
+        catch (e) { if (e.message !== 'bad_pass') $('list').innerHTML = '<div class="empty">تعذر الاتصال، اضغط ⟳ للمحاولة مرة أخرى.</div>'; }
         busy = false;
     }
     function render() {
-        const inGrade = students.filter(s => !fGrade || s.grade === fGrade);
-        ['pending', 'approved', 'blocked'].forEach(k => { $('n-' + k).textContent = inGrade.filter(s => s.status === k).length; });
+        ['pending', 'approved', 'blocked'].forEach(k => { $('n-' + k).textContent = accounts.filter(s => s.status === k).length; });
         document.querySelectorAll('.stat').forEach(el => el.classList.toggle('on', el.dataset.st === fStatus));
-        $('btn-approve-all').classList.toggle('hide', fStatus !== 'pending' || !inGrade.some(s => s.status === 'pending'));
+        $('btn-approve-all').classList.toggle('hide', fStatus !== 'pending' || !accounts.some(s => s.status === 'pending'));
         const q = $('search').value.trim().toLowerCase();
-        let list = inGrade.filter(s => s.status === fStatus && (!q || String(s.name).toLowerCase().includes(q) || String(s.phone).includes(q)));
+        let list = accounts.filter(s => s.status === fStatus && (!q || String(s.name).toLowerCase().includes(q) || s.username.includes(q) || s.phone.includes(q)));
         list.sort((a, b) => String(b.created).localeCompare(String(a.created)));
-        if (!list.length) { $('list').innerHTML = '<div class="empty">' + (q ? 'لا توجد نتائج' : 'لا يوجد طلاب ' + ST[fStatus]) + '</div>'; return; }
+        if (!list.length) { $('list').innerHTML = '<div class="empty">' + (q ? 'لا توجد نتائج' : 'لا توجد حسابات ' + ST[fStatus]) + '</div>'; return; }
         $('list').innerHTML = list.map(s => {
-            const id = 'data-p="' + esc(s.phone) + '" data-g="' + esc(s.grade) + '"';
+            const id = 'data-u="' + esc(s.username) + '"';
             let acts = '';
             if (s.status === 'pending') acts = '<button class="a ok" data-do="approve" ' + id + '>✔ قبول</button><button class="a bad" data-do="block" ' + id + '>✖ رفض</button>';
-            if (s.status === 'approved') acts = '<button class="a bad" data-do="block" ' + id + '>⛔ إيقاف</button>' + (s.device ? '<button class="a blue" data-do="reset" ' + id + '>📱 إعادة تعيين الجهاز</button>' : '');
+            if (s.status === 'approved') acts = '<button class="a bad" data-do="block" ' + id + '>⛔ إيقاف</button>';
             if (s.status === 'blocked') acts = '<button class="a ok" data-do="approve" ' + id + '>✔ تفعيل</button>';
-            acts += '<button class="a gray" data-do="delete" ' + id + '>🗑 حذف</button>';
-            const wa = String(s.phone).replace(/^0/, '20');
+            acts += '<button class="a blue" data-do="pass" ' + id + '>🔑 كلمة مرور جديدة</button><button class="a gray" data-do="delete" ' + id + '>🗑 حذف</button>';
+            const wa = s.phone ? s.phone.replace(/^0/, '20') : '';
             return '<div class="stu ' + s.status + '"><div class="top"><span class="nm">' + esc(s.name) + '</span>' +
-                '<span class="badge">' + esc(GRADES[s.grade] || s.grade) + '</span><span class="badge ' + s.status + '">' + ST[s.status] + '</span></div>' +
-                '<div class="meta">📞 <a href="https://wa.me/' + esc(wa) + '" target="_blank">' + esc(s.phone) + '</a> · 🕒 طلب: ' + fmt(s.created) +
-                (s.status === 'approved' ? '<br>📱 ' + (s.device ? 'مربوط بجهاز' : 'لم يدخل بعد') + ' · آخر دخول: ' + fmt(s.lastSeen) : '') + '</div>' +
+                '<span class="badge" dir="ltr">@' + esc(s.username) + '</span><span class="badge ' + s.status + '">' + ST[s.status] + '</span></div>' +
+                '<div class="meta">' + (s.phone ? '📞 <a href="https://wa.me/' + esc(wa) + '" target="_blank">' + esc(s.phone) + '</a> · ' : '') + '🕒 التسجيل: ' + fmt(s.created) +
+                (s.status !== 'pending' ? '<br>🔓 آخر دخول: ' + fmt(s.lastLogin) + ' · عدد مرات الدخول: ' + s.logins : '') + '</div>' +
                 '<div class="acts">' + acts + '</div></div>';
         }).join('');
     }
@@ -206,28 +193,27 @@ input:focus, select:focus { border-color: var(--p); }
 
     $('list').addEventListener('click', async e => {
         const b = e.target.closest('[data-do]'); if (!b) return;
-        const s = students.find(x => x.phone === b.dataset.p && x.grade === b.dataset.g); if (!s) return;
+        const s = accounts.find(x => x.username === b.dataset.u); if (!s) return;
         const d = b.dataset.do;
-        if (d === 'delete' && !(await confirmBox('حذف الطالب', 'هيتم حذف <b>' + esc(s.name) + '</b> نهائياً، ولو حب يدخل تاني لازم يسجل من جديد.', 'حذف'))) return;
-        if (d === 'reset' && !(await confirmBox('إعادة تعيين الجهاز', 'الطالب <b>' + esc(s.name) + '</b> هيقدر يدخل من جهاز جديد (أول جهاز يفتح منه بعد كده).', 'تأكيد'))) return;
+        if (d === 'pass') return resetPass(s);
+        if (d === 'delete' && !(await confirmBox('حذف الحساب', 'هيتم حذف حساب <b>' + esc(s.name) + '</b> نهائياً.', 'حذف'))) return;
         b.closest('.stu').classList.add('loading');
         try {
-            const map = { approve: ['adminSet', { status: 'approved' }], block: ['adminSet', { status: 'blocked' }], reset: ['adminResetDevice', {}], delete: ['adminDelete', {}] };
-            const r = await call(map[d][0], Object.assign({ phone: s.phone, grade: s.grade }, map[d][1]));
+            const map = { approve: ['adminSet', { status: 'approved' }], block: ['adminSet', { status: 'blocked' }], delete: ['adminDelete', {}] };
+            const r = await call(map[d][0], Object.assign({ username: s.username }, map[d][1]));
             if (r.ok) {
                 if (d === 'approve') { s.status = 'approved'; toast('✔ تم قبول ' + s.name); }
                 if (d === 'block') { s.status = 'blocked'; toast('تم إيقاف ' + s.name); }
-                if (d === 'reset') { s.device = false; toast('تم إعادة تعيين جهاز ' + s.name); }
-                if (d === 'delete') { students = students.filter(x => x !== s); toast('تم الحذف'); }
+                if (d === 'delete') { accounts = accounts.filter(x => x !== s); toast('تم الحذف'); }
             } else toast(ERR[r.error] || 'حدث خطأ');
         } catch (x) { if (x.message !== 'bad_pass') toast('تعذر الاتصال'); }
         render();
     });
 
     $('btn-approve-all').addEventListener('click', async () => {
-        const n = students.filter(s => s.status === 'pending' && (!fGrade || s.grade === fGrade)).length;
-        if (!(await confirmBox('قبول الكل', 'هيتم قبول <b>' + n + '</b> طالب ' + (fGrade ? 'في ' + esc(GRADES[fGrade]) : 'في كل الصفوف') + '.', 'قبول الكل'))) return;
-        try { const r = await call('adminApproveAll', { grade: fGrade }); if (r.ok) toast('✔ تم قبول ' + r.count + ' طالب'); } catch (e) {}
+        const n = accounts.filter(s => s.status === 'pending').length;
+        if (!(await confirmBox('قبول الكل', 'هيتم قبول <b>' + n + '</b> حساب.', 'قبول الكل'))) return;
+        try { const r = await call('adminApproveAll'); if (r.ok) toast('✔ تم قبول ' + r.count + ' حساب'); } catch (e) {}
         load(true);
     });
 
@@ -245,21 +231,31 @@ input:focus, select:focus { border-color: var(--p); }
             $('m-no').onclick = () => { root.innerHTML = ''; res(false); };
         });
     }
+    function resetPass(s) {
+        const root = modal('<h3>كلمة مرور جديدة</h3><p>للحساب: <b>' + esc(s.name) + '</b> <span dir="ltr">(@' + esc(s.username) + ')</span></p><label>كلمة المرور الجديدة</label><input id="m-np" dir="ltr"><div class="err" id="m-err"></div><div class="row2"><button class="btn" id="m-ok">حفظ</button><button class="btn gray" id="m-no">إلغاء</button></div>');
+        $('m-no').onclick = () => root.innerHTML = '';
+        $('m-ok').onclick = async () => {
+            try {
+                const r = await call('adminResetPass', { username: s.username, newPass: $('m-np').value });
+                if (r.ok) { root.innerHTML = ''; toast('✔ تم تغيير كلمة المرور، ابعتها للطالب'); }
+                else $('m-err').textContent = ERR[r.error] || 'حدث خطأ';
+            } catch (e) {}
+        };
+    }
     $('btn-add').addEventListener('click', () => {
-        const opts = Object.keys(GRADES).map(g => '<option value="' + g + '"' + (g === fGrade ? ' selected' : '') + '>' + esc(GRADES[g]) + '</option>').join('');
-        const root = modal('<h3>إضافة طالب (مقبول مباشرة)</h3><label>اسم الطالب</label><input id="m-name"><label>رقم الموبايل</label><input id="m-phone" inputmode="tel" style="direction:ltr;text-align:left"><label>الصف</label><select id="m-grade">' + opts + '</select><div class="err" id="m-err"></div><div class="row2"><button class="btn" id="m-ok">إضافة</button><button class="btn gray" id="m-no">إلغاء</button></div>');
+        const root = modal('<h3>إضافة حساب (مقبول مباشرة)</h3><label>الاسم الثلاثي</label><input id="m-name"><label>اسم المستخدم</label><input id="m-user" dir="ltr" autocapitalize="none"><label>كلمة المرور</label><input id="m-pw" dir="ltr"><label>موبايل ولي الأمر (اختياري)</label><input id="m-phone" inputmode="tel" dir="ltr"><div class="err" id="m-err"></div><div class="row2"><button class="btn" id="m-ok">إضافة</button><button class="btn gray" id="m-no">إلغاء</button></div>');
         $('m-no').onclick = () => root.innerHTML = '';
         $('m-ok').onclick = async () => {
             $('m-ok').classList.add('loading');
             try {
-                const r = await call('adminAdd', { name: $('m-name').value, phone: $('m-phone').value, grade: $('m-grade').value });
+                const r = await call('adminAdd', { name: $('m-name').value, username: $('m-user').value, newPass: $('m-pw').value, phone: $('m-phone').value });
                 if (r.ok) { root.innerHTML = ''; toast('✔ تمت الإضافة'); fStatus = 'approved'; load(true); }
                 else { $('m-err').textContent = ERR[r.error] || 'حدث خطأ'; $('m-ok').classList.remove('loading'); }
             } catch (e) { $('m-ok').classList.remove('loading'); }
         };
     });
     $('btn-menu').addEventListener('click', () => {
-        const root = modal('<h3>الإعدادات</h3><label>كلمة مرور جديدة</label><input id="m-np" type="password"><label>تأكيد كلمة المرور</label><input id="m-np2" type="password"><div class="err" id="m-err"></div>' +
+        const root = modal('<h3>الإعدادات</h3><label>كلمة مرور جديدة للوحة التحكم</label><input id="m-np" type="password"><label>تأكيد كلمة المرور</label><input id="m-np2" type="password"><div class="err" id="m-err"></div>' +
             '<div class="row2"><button class="btn" id="m-ok">حفظ كلمة المرور</button><button class="btn gray" id="m-no">إغلاق</button></div>' +
             '<button class="btn full" id="m-out" style="background:var(--bad);box-shadow:0 4px 0 #991b1b">تسجيل الخروج</button>');
         $('m-no').onclick = () => root.innerHTML = '';
@@ -275,10 +271,7 @@ input:focus, select:focus { border-color: var(--p); }
         };
     });
 
-    // auto refresh every 30s
     setInterval(() => { if (PASS && !document.hidden && !$('modal-root').innerHTML) load(true); }, 30000);
-
-    // resume session
     try { const p = sessionStorage.getItem('ny_admin'); if (p) { $('pass').value = p; login(); } } catch (e) {}
 })();
 </script>
