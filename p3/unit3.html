@@ -187,8 +187,8 @@ header {
 }
 .team-panel .option-btn { font-size: 1.15rem; padding: 14px 10px; }
 .team-panel.solo .option-btn { font-size: 1.3rem; padding: 18px; }
-.option-btn:active { transform: translateY(5px); box-shadow: 0 0 0 #cbd5e1; }
-.option-btn:hover { border-color: var(--team, var(--primary)); background: #f8fafc; }
+.option-btn:active { transform: translateY(3px); }
+@media (hover: hover) { .option-btn:hover { border-color: var(--team, var(--primary)); background: #f8fafc; } }
 .option-btn.correct { background: var(--success); border-color: var(--success); color: white; box-shadow: 0 5px 0 #15803d; }
 .option-btn.wrong { background: var(--danger); border-color: var(--danger); color: white; box-shadow: 0 5px 0 #b91c1c; }
 .option-btn, .bubble, .target { touch-action: manipulation; user-select: none; -webkit-user-select: none; }
@@ -436,7 +436,9 @@ body.compact .brand .ms { display: inline; font-size: 0.7em; letter-spacing: 1px
   .typed-input { font-size: 1.15rem; }
 }
 
-.option-btn.selected { border-color: var(--primary) !important; background: #ede9fe !important; box-shadow: 0 5px 0 var(--primary) !important; }
+.option-btn.selected { border-color: var(--primary) !important; background: #7c3aed !important; color:#fff !important; box-shadow: 0 5px 0 #5b21b6 !important; }
+.option-btn:focus { outline: none; }
+.btn-check b { margin-inline-start: 4px; }
 .check-row { display: flex; gap: 12px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
 .btn-check, .btn-next { border: none; border-radius: 14px; padding: 14px 34px; font-size: 1.2rem; font-weight: 800; cursor: pointer; font-family: inherit; color: #fff; touch-action: manipulation; }
 .btn-check { background: var(--primary); box-shadow: 0 5px 0 var(--primary-dark); }
@@ -626,12 +628,8 @@ body.compact .brand .ms { display: inline; font-size: 0.7em; letter-spacing: 1px
         function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
 
         function onTap(el, fn) {
-            if (window.PointerEvent) {
-                el.addEventListener('pointerdown', e => { e.preventDefault(); fn(); });
-            } else {
-                el.addEventListener('touchstart', e => { e.preventDefault(); fn(); }, { passive: false });
-                el.addEventListener('mousedown', fn);
-            }
+            // real tap only: 'click' does not fire when the finger scrolls the page
+            el.addEventListener('click', e => { e.preventDefault(); fn(); });
         }
 
         function switchScreen(screenId) {
@@ -978,7 +976,7 @@ body.compact .brand .ms { display: inline; font-size: 0.7em; letter-spacing: 1px
             btn.classList.add('selected');
             team.sel = btn.dataset.opt;
             const c = team.el.zone.querySelector('.btn-check');
-            if (c) c.disabled = false;
+            if (c) { c.disabled = false; c.innerHTML = '<i class="fas fa-check"></i> Check: <b>' + esc(team.sel) + '</b>'; }
         }
         function addCheck(team, fn) {
             const row = document.createElement('div');
