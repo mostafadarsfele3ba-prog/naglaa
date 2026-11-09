@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>لوحة التحكم | Ms. Naglaa Yehia</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root { --p: #7c3aed; --pd: #5b21b6; --pl: #ede9fe; --ok: #16a34a; --bad: #dc2626; --warn: #d97706; --ink: #1e1b4b; --mut: #6b7280; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Cairo', sans-serif; background: #f5f3ff; color: var(--ink); min-height: 100vh; }
+button { font-family: inherit; cursor: pointer; }
+.hide { display: none !important; }
+header { background: linear-gradient(135deg, #4c1d95, #7c3aed 60%, #db2777); color: #fff; padding: 14px 16px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 5; box-shadow: 0 4px 14px rgba(76,29,149,.3); }
+.logo { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font: 800 1.2rem 'Poppins', sans-serif; flex: none; }
+header h1 { margin: 0; font-size: 1.15rem; font-weight: 900; line-height: 1.3; }
+header small { display: block; font-weight: 400; opacity: .85; font-size: .8rem; }
+header .sp { flex: 1; }
+.hbtn { background: rgba(255,255,255,.18); color: #fff; border: 0; border-radius: 12px; padding: 8px 12px; font-weight: 700; font-size: .9rem; }
+main { max-width: 860px; margin: 0 auto; padding: 14px; }
+.card { background: #fff; border-radius: 18px; box-shadow: 0 4px 16px rgba(76,29,149,.08); padding: 18px; margin-bottom: 14px; }
+/* login */
+#login { max-width: 400px; margin: 10vh auto 0; text-align: center; }
+#login .logo { width: 80px; height: 80px; margin: 0 auto 8px; background: linear-gradient(135deg, #7c3aed, #ec4899); color: #fff; font-size: 1.9rem; }
+input, select { width: 100%; padding: 12px 14px; border: 2px solid #ddd6fe; border-radius: 12px; font: 700 1rem 'Cairo', sans-serif; outline: none; background: #fff; }
+input:focus, select:focus { border-color: var(--p); }
+.btn { border: 0; border-radius: 12px; padding: 11px 16px; font-weight: 900; font-size: 1rem; color: #fff; background: var(--p); box-shadow: 0 4px 0 var(--pd); }
+.btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--pd); }
+.btn.full { width: 100%; margin-top: 12px; }
+.err { color: var(--bad); font-weight: 700; margin-top: 10px; min-height: 1.4em; }
+/* stats */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+.stat { background: #fff; border-radius: 16px; padding: 12px 8px; text-align: center; box-shadow: 0 4px 14px rgba(76,29,149,.08); border: 3px solid transparent; }
+.stat b { display: block; font-size: 1.7rem; font-weight: 900; line-height: 1.2; }
+.stat span { font-size: .85rem; color: var(--mut); font-weight: 700; }
+.stat.pending b { color: var(--warn); } .stat.approved b { color: var(--ok); } .stat.blocked b { color: var(--bad); }
+.stat.on { border-color: var(--p); }
+/* filters */
+.tabs, .chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.chip { flex: none; border: 2px solid #ddd6fe; background: #fff; color: var(--ink); border-radius: 20px; padding: 6px 14px; font-weight: 700; font-size: .9rem; }
+.chip.on { background: var(--p); border-color: var(--p); color: #fff; }
+.tools { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.tools input { flex: 1; min-width: 180px; }
+.tools .btn { white-space: nowrap; }
+/* list */
+.stu { background: #fff; border-radius: 16px; padding: 14px; margin-bottom: 10px; box-shadow: 0 3px 12px rgba(76,29,149,.07); border-right: 6px solid #ddd; }
+.stu.pending { border-right-color: var(--warn); } .stu.approved { border-right-color: var(--ok); } .stu.blocked { border-right-color: var(--bad); }
+.stu .top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.stu .nm { font-weight: 900; font-size: 1.1rem; }
+.badge { font-size: .78rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; background: var(--pl); color: #4c1d95; }
+.badge.pending { background: #fef3c7; color: #92400e; } .badge.approved { background: #dcfce7; color: #166534; } .badge.blocked { background: #fee2e2; color: #991b1b; }
+.stu .meta { color: var(--mut); font-size: .88rem; margin-top: 4px; line-height: 1.7; }
+.stu .meta a { color: var(--p); font-weight: 700; text-decoration: none; direction: ltr; display: inline-block; }
+.acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.a { border: 0; border-radius: 10px; padding: 8px 12px; font-weight: 700; font-size: .9rem; color: #fff; }
+.a.ok { background: var(--ok); } .a.bad { background: var(--bad); } .a.gray { background: #e5e7eb; color: #374151; } .a.blue { background: #2563eb; }
+.empty { text-align: center; color: var(--mut); padding: 30px 10px; font-weight: 700; }
+.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: #111827; color: #fff; padding: 10px 18px; border-radius: 12px; font-weight: 700; transition: .3s; z-index: 50; max-width: 90%; }
+.toast.show { transform: translateX(-50%) translateY(0); }
+.modal { position: fixed; inset: 0; background: rgba(17,24,39,.55); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 40; }
+.modal .card { width: 100%; max-width: 420px; margin: 0; }
+.modal h3 { margin: 0 0 10px; }
+.modal label { display: block; font-weight: 700; margin: 10px 0 4px; }
+.row2 { display: flex; gap: 8px; margin-top: 14px; } .row2 .btn { flex: 1; }
+.btn.gray { background: #e5e7eb; color: #374151; box-shadow: 0 4px 0 #d1d5db; }
+.loading { opacity: .5; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<!-- login -->
+<section id="login" class="card">
+    <div class="logo">NY</div>
+    <h2 style="margin:4px 0">لوحة تحكم المدرسة</h2>
+    <p style="color:var(--mut);font-weight:700;margin-top:0">Ms. Naglaa Yehia</p>
+    <input id="pass" type="password" placeholder="كلمة المرور" autocomplete="current-password">
+    <button class="btn full" id="btn-login">دخول</button>
+    <div class="err" id="login-err"></div>
+</section>
+
+<!-- dashboard -->
+<div id="dash" class="hide">
+    <header>
+        <div class="logo">NY</div>
+        <h1>طلبات الطلاب<small>Ms. Naglaa Yehia</small></h1>
+        <div class="sp"></div>
+        <button class="hbtn" id="btn-refresh" title="تحديث">⟳</button>
+        <button class="hbtn" id="btn-menu">⋮</button>
+    </header>
+    <main>
+        <div class="stats">
+            <div class="stat pending" data-st="pending"><b id="n-pending">0</b><span>في الانتظار</span></div>
+            <div class="stat approved" data-st="approved"><b id="n-approved">0</b><span>مقبول</span></div>
+            <div class="stat blocked" data-st="blocked"><b id="n-blocked">0</b><span>موقوف</span></div>
+        </div>
+        <div class="card" style="padding:14px">
+            <div class="chips" id="grade-chips"></div>
+            <div class="tools">
+                <input id="search" placeholder="🔍 بحث بالاسم أو الرقم">
+                <button class="btn" id="btn-approve-all" style="background:var(--ok);box-shadow:0 4px 0 #15803d">✔ قبول كل المنتظرين</button>
+                <button class="btn" id="btn-add">＋ إضافة طالب</button>
+            </div>
+        </div>
+        <div id="list"></div>
+    </main>
+</div>
+
+<div class="toast" id="toast"></div>
+<div id="modal-root"></div>
+
+<script src="config.js"></script>
+<script>
+(function () {
+    const API = window.NY_API || '';
+    const $ = id => document.getElementById(id);
+    const ST = { pending: 'في الانتظار', approved: 'مقبول', blocked: 'موقوف' };
+    let PASS = '', GRADES = {}, students = [], fStatus = 'pending', fGrade = '', busy = false;
+
+    function esc(t) { const d = document.createElement('div'); d.textContent = t == null ? '' : t; return d.innerHTML; }
+    function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2600); }
+    function fmt(iso) {
+        if (!iso) return '—';
+        const d = new Date(iso); if (isNaN(d)) return '—';
+        return d.toLocaleDateString('ar-EG', { day: 'numeric', month: 'short' }) + ' ' + d.toLocaleTimeString('ar-EG', { hour: 'numeric', minute: '2-digit' });
+    }
+    async function call(action, extra) {
+        const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(Object.assign({ action: action, pass: PASS }, extra || {})) });
+        const j = await r.json();
+        if (j.error === 'bad_pass') { logout('انتهت الجلسة، ادخل كلمة المرور مرة أخرى.'); throw new Error('bad_pass'); }
+        return j;
+    }
+    const ERR = { bad_phone: 'رقم الموبايل غير صحيح', bad_name: 'اكتب اسم الطالب', exists: 'الطالب مسجل بالفعل في هذا الصف', short_pass: 'كلمة المرور قصيرة (4 أحرف على الأقل)', not_found: 'الطالب غير موجود', locked: 'محاولات كثيرة خاطئة، انتظر 10 دقائق' };
+
+    /* ---------- login ---------- */
+    async function login() {
+        const p = $('pass').value.trim();
+        if (!p) return;
+        if (!API || /PASTE/.test(API)) { $('login-err').textContent = 'الموقع غير مربوط بالخادم بعد (config.js).'; return; }
+        $('btn-login').classList.add('loading'); $('login-err').textContent = '';
+        try {
+            const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'adminLogin', pass: p }) }).then(x => x.json());
+            if (r.ok) {
+                PASS = p; GRADES = r.grades || {};
+                try { sessionStorage.setItem('ny_admin', p); } catch (e) {}
+                showDash();
+            } else $('login-err').textContent = r.error === 'locked' ? ERR.locked : 'كلمة المرور غير صحيحة';
+        } catch (e) { $('login-err').textContent = 'تعذر الاتصال، تأكد من الإنترنت.'; }
+        $('btn-login').classList.remove('loading');
+    }
+    function logout(m) {
+        PASS = ''; try { sessionStorage.removeItem('ny_admin'); } catch (e) {}
+        $('dash').classList.add('hide'); $('login').classList.remove('hide');
+        $('pass').value = ''; $('login-err').textContent = m || '';
+    }
+    $('btn-login').addEventListener('click', login);
+    $('pass').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+    /* ---------- dashboard ---------- */
+    function showDash() {
+        $('login').classList.add('hide'); $('dash').classList.remove('hide');
+        const chips = $('grade-chips');
+        chips.innerHTML = '<button class="chip on" data-g="">كل الصفوف</button>' +
+            Object.keys(GRADES).map(g => '<button class="chip" data-g="' + g + '">' + esc(GRADES[g]) + '</button>').join('');
+        chips.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+            fGrade = c.dataset.g; chips.querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === c)); render();
+        }));
+        load();
+    }
+    async function load(quiet) {
+        if (busy) return; busy = true;
+        if (!quiet) $('list').innerHTML = '<div class="empty">جاري التحميل…</div>';
+        try {
+            const r = await call('adminList');
+            if (r.ok) { students = r.students || []; GRADES = r.grades || GRADES; render(); }
+        } catch (e) { if (e.message !== 'bad_pass') $('list').innerHTML = '<div class="empty">تعذر الاتصال، اضغط ⟳ للمحاولة مرة أخرى.</div>'; }
+        busy = false;
+    }
+    function render() {
+        const inGrade = students.filter(s => !fGrade || s.grade === fGrade);
+        ['pending', 'approved', 'blocked'].forEach(k => { $('n-' + k).textContent = inGrade.filter(s => s.status === k).length; });
+        document.querySelectorAll('.stat').forEach(el => el.classList.toggle('on', el.dataset.st === fStatus));
+        $('btn-approve-all').classList.toggle('hide', fStatus !== 'pending' || !inGrade.some(s => s.status === 'pending'));
+        const q = $('search').value.trim().toLowerCase();
+        let list = inGrade.filter(s => s.status === fStatus && (!q || String(s.name).toLowerCase().includes(q) || String(s.phone).includes(q)));
+        list.sort((a, b) => String(b.created).localeCompare(String(a.created)));
+        if (!list.length) { $('list').innerHTML = '<div class="empty">' + (q ? 'لا توجد نتائج' : 'لا يوجد طلاب ' + ST[fStatus]) + '</div>'; return; }
+        $('list').innerHTML = list.map(s => {
+            const id = 'data-p="' + esc(s.phone) + '" data-g="' + esc(s.grade) + '"';
+            let acts = '';
+            if (s.status === 'pending') acts = '<button class="a ok" data-do="approve" ' + id + '>✔ قبول</button><button class="a bad" data-do="block" ' + id + '>✖ رفض</button>';
+            if (s.status === 'approved') acts = '<button class="a bad" data-do="block" ' + id + '>⛔ إيقاف</button>' + (s.device ? '<button class="a blue" data-do="reset" ' + id + '>📱 إعادة تعيين الجهاز</button>' : '');
+            if (s.status === 'blocked') acts = '<button class="a ok" data-do="approve" ' + id + '>✔ تفعيل</button>';
+            acts += '<button class="a gray" data-do="delete" ' + id + '>🗑 حذف</button>';
+            const wa = String(s.phone).replace(/^0/, '20');
+            return '<div class="stu ' + s.status + '"><div class="top"><span class="nm">' + esc(s.name) + '</span>' +
+                '<span class="badge">' + esc(GRADES[s.grade] || s.grade) + '</span><span class="badge ' + s.status + '">' + ST[s.status] + '</span></div>' +
+                '<div class="meta">📞 <a href="https://wa.me/' + esc(wa) + '" target="_blank">' + esc(s.phone) + '</a> · 🕒 طلب: ' + fmt(s.created) +
+                (s.status === 'approved' ? '<br>📱 ' + (s.device ? 'مربوط بجهاز' : 'لم يدخل بعد') + ' · آخر دخول: ' + fmt(s.lastSeen) : '') + '</div>' +
+                '<div class="acts">' + acts + '</div></div>';
+        }).join('');
+    }
+    document.querySelectorAll('.stat').forEach(el => el.addEventListener('click', () => { fStatus = el.dataset.st; render(); }));
+    $('search').addEventListener('input', render);
+    $('btn-refresh').addEventListener('click', () => load());
+
+    $('list').addEventListener('click', async e => {
+        const b = e.target.closest('[data-do]'); if (!b) return;
+        const s = students.find(x => x.phone === b.dataset.p && x.grade === b.dataset.g); if (!s) return;
+        const d = b.dataset.do;
+        if (d === 'delete' && !(await confirmBox('حذف الطالب', 'هيتم حذف <b>' + esc(s.name) + '</b> نهائياً، ولو حب يدخل تاني لازم يسجل من جديد.', 'حذف'))) return;
+        if (d === 'reset' && !(await confirmBox('إعادة تعيين الجهاز', 'الطالب <b>' + esc(s.name) + '</b> هيقدر يدخل من جهاز جديد (أول جهاز يفتح منه بعد كده).', 'تأكيد'))) return;
+        b.closest('.stu').classList.add('loading');
+        try {
+            const map = { approve: ['adminSet', { status: 'approved' }], block: ['adminSet', { status: 'blocked' }], reset: ['adminResetDevice', {}], delete: ['adminDelete', {}] };
+            const r = await call(map[d][0], Object.assign({ phone: s.phone, grade: s.grade }, map[d][1]));
+            if (r.ok) {
+                if (d === 'approve') { s.status = 'approved'; toast('✔ تم قبول ' + s.name); }
+                if (d === 'block') { s.status = 'blocked'; toast('تم إيقاف ' + s.name); }
+                if (d === 'reset') { s.device = false; toast('تم إعادة تعيين جهاز ' + s.name); }
+                if (d === 'delete') { students = students.filter(x => x !== s); toast('تم الحذف'); }
+            } else toast(ERR[r.error] || 'حدث خطأ');
+        } catch (x) { if (x.message !== 'bad_pass') toast('تعذر الاتصال'); }
+        render();
+    });
+
+    $('btn-approve-all').addEventListener('click', async () => {
+        const n = students.filter(s => s.status === 'pending' && (!fGrade || s.grade === fGrade)).length;
+        if (!(await confirmBox('قبول الكل', 'هيتم قبول <b>' + n + '</b> طالب ' + (fGrade ? 'في ' + esc(GRADES[fGrade]) : 'في كل الصفوف') + '.', 'قبول الكل'))) return;
+        try { const r = await call('adminApproveAll', { grade: fGrade }); if (r.ok) toast('✔ تم قبول ' + r.count + ' طالب'); } catch (e) {}
+        load(true);
+    });
+
+    /* ---------- modals ---------- */
+    function modal(html) {
+        const root = $('modal-root');
+        root.innerHTML = '<div class="modal"><div class="card">' + html + '</div></div>';
+        root.querySelector('.modal').addEventListener('click', e => { if (e.target.classList.contains('modal')) root.innerHTML = ''; });
+        return root;
+    }
+    function confirmBox(title, text, okText) {
+        return new Promise(res => {
+            const root = modal('<h3>' + title + '</h3><p style="line-height:1.8">' + text + '</p><div class="row2"><button class="btn" id="m-ok">' + okText + '</button><button class="btn gray" id="m-no">إلغاء</button></div>');
+            $('m-ok').onclick = () => { root.innerHTML = ''; res(true); };
+            $('m-no').onclick = () => { root.innerHTML = ''; res(false); };
+        });
+    }
+    $('btn-add').addEventListener('click', () => {
+        const opts = Object.keys(GRADES).map(g => '<option value="' + g + '"' + (g === fGrade ? ' selected' : '') + '>' + esc(GRADES[g]) + '</option>').join('');
+        const root = modal('<h3>إضافة طالب (مقبول مباشرة)</h3><label>اسم الطالب</label><input id="m-name"><label>رقم الموبايل</label><input id="m-phone" inputmode="tel" style="direction:ltr;text-align:left"><label>الصف</label><select id="m-grade">' + opts + '</select><div class="err" id="m-err"></div><div class="row2"><button class="btn" id="m-ok">إضافة</button><button class="btn gray" id="m-no">إلغاء</button></div>');
+        $('m-no').onclick = () => root.innerHTML = '';
+        $('m-ok').onclick = async () => {
+            $('m-ok').classList.add('loading');
+            try {
+                const r = await call('adminAdd', { name: $('m-name').value, phone: $('m-phone').value, grade: $('m-grade').value });
+                if (r.ok) { root.innerHTML = ''; toast('✔ تمت الإضافة'); fStatus = 'approved'; load(true); }
+                else { $('m-err').textContent = ERR[r.error] || 'حدث خطأ'; $('m-ok').classList.remove('loading'); }
+            } catch (e) { $('m-ok').classList.remove('loading'); }
+        };
+    });
+    $('btn-menu').addEventListener('click', () => {
+        const root = modal('<h3>الإعدادات</h3><label>كلمة مرور جديدة</label><input id="m-np" type="password"><label>تأكيد كلمة المرور</label><input id="m-np2" type="password"><div class="err" id="m-err"></div>' +
+            '<div class="row2"><button class="btn" id="m-ok">حفظ كلمة المرور</button><button class="btn gray" id="m-no">إغلاق</button></div>' +
+            '<button class="btn full" id="m-out" style="background:var(--bad);box-shadow:0 4px 0 #991b1b">تسجيل الخروج</button>');
+        $('m-no').onclick = () => root.innerHTML = '';
+        $('m-out').onclick = () => { root.innerHTML = ''; logout(); };
+        $('m-ok').onclick = async () => {
+            const a = $('m-np').value, b = $('m-np2').value;
+            if (a !== b) { $('m-err').textContent = 'كلمتا المرور غير متطابقتين'; return; }
+            try {
+                const r = await call('adminChangePass', { newPass: a });
+                if (r.ok) { PASS = a; try { sessionStorage.setItem('ny_admin', a); } catch (e) {} root.innerHTML = ''; toast('✔ تم تغيير كلمة المرور'); }
+                else $('m-err').textContent = ERR[r.error] || 'حدث خطأ';
+            } catch (e) {}
+        };
+    });
+
+    // auto refresh every 30s
+    setInterval(() => { if (PASS && !document.hidden && !$('modal-root').innerHTML) load(true); }, 30000);
+
+    // resume session
+    try { const p = sessionStorage.getItem('ny_admin'); if (p) { $('pass').value = p; login(); } } catch (e) {}
+})();
+</script>
+</body>
+</html>
