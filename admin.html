@@ -130,7 +130,7 @@ input:focus, select:focus { border-color: var(--p); }
         if (j.error === 'bad_pass') { logout('انتهت الجلسة، ادخل كلمة المرور مرة أخرى.'); throw new Error('bad_pass'); }
         return j;
     }
-    const ERR = { bad_phone: 'رقم الموبايل غير صحيح', bad_name: 'اكتب اسم الطالب', exists: 'الطالب مسجل بالفعل في هذا الصف', short_pass: 'كلمة المرور قصيرة (4 أحرف على الأقل)', not_found: 'الطالب غير موجود', locked: 'محاولات كثيرة خاطئة، انتظر 10 دقائق' };
+    const ERR = { bad_phone: 'رقم الموبايل غير صحيح', bad_name: 'اكتب اسم الطالب', exists: 'رقم الموبايل ده مسجل بالفعل', short_pass: 'كلمة المرور قصيرة (4 أحرف على الأقل)', not_found: 'الطالب غير موجود', locked: 'محاولات كثيرة خاطئة، انتظر 10 دقائق' };
 
     /* ---------- login ---------- */
     async function login() {
